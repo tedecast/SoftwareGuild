@@ -1,0 +1,10 @@
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.BLL\bin\Debug\Warmups.BLL.dll
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.BLL\bin\Debug\Warmups.BLL.pdb
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.BLL\obj\Debug\Warmups.BLL.csprojResolveAssemblyReference.cache
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.BLL\obj\Debug\Warmups.BLL.dll
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.BLL\obj\Debug\Warmups.BLL.pdb
+Z:\Downloads\Warmups (3)\Warmups.BLL\bin\Debug\Warmups.BLL.dll
+Z:\Downloads\Warmups (3)\Warmups.BLL\bin\Debug\Warmups.BLL.pdb
+Z:\Downloads\Warmups (3)\Warmups.BLL\obj\Debug\Warmups.BLL.csprojResolveAssemblyReference.cache
+Z:\Downloads\Warmups (3)\Warmups.BLL\obj\Debug\Warmups.BLL.dll
+Z:\Downloads\Warmups (3)\Warmups.BLL\obj\Debug\Warmups.BLL.pdb

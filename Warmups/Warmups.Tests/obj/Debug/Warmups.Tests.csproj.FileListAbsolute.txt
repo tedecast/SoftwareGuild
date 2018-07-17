@@ -1,0 +1,18 @@
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.Tests\bin\Debug\Warmups.Tests.dll
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.Tests\bin\Debug\Warmups.Tests.pdb
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.Tests\bin\Debug\nunit.framework.dll
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.Tests\bin\Debug\Warmups.BLL.dll
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.Tests\bin\Debug\Warmups.BLL.pdb
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.Tests\bin\Debug\nunit.framework.xml
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.Tests\obj\Debug\Warmups.Tests.csprojResolveAssemblyReference.cache
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.Tests\obj\Debug\Warmups.Tests.dll
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.Tests\obj\Debug\Warmups.Tests.pdb
+Z:\Downloads\Warmups (3)\Warmups.Tests\bin\Debug\Warmups.Tests.dll
+Z:\Downloads\Warmups (3)\Warmups.Tests\bin\Debug\Warmups.Tests.pdb
+Z:\Downloads\Warmups (3)\Warmups.Tests\bin\Debug\nunit.framework.dll
+Z:\Downloads\Warmups (3)\Warmups.Tests\bin\Debug\Warmups.BLL.dll
+Z:\Downloads\Warmups (3)\Warmups.Tests\bin\Debug\Warmups.BLL.pdb
+Z:\Downloads\Warmups (3)\Warmups.Tests\bin\Debug\nunit.framework.xml
+Z:\Downloads\Warmups (3)\Warmups.Tests\obj\Debug\Warmups.Tests.csprojResolveAssemblyReference.cache
+Z:\Downloads\Warmups (3)\Warmups.Tests\obj\Debug\Warmups.Tests.dll
+Z:\Downloads\Warmups (3)\Warmups.Tests\obj\Debug\Warmups.Tests.pdb
