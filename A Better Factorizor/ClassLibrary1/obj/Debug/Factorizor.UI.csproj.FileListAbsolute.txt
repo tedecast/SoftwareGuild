@@ -1,0 +1,9 @@
+C:\Users\jeremywakefield\source\repos\ClassLibrary1\ClassLibrary1\obj\Debug\Factorizor.UI.csprojAssemblyReference.cache
+C:\Users\jeremywakefield\source\repos\ClassLibrary1\ClassLibrary1\obj\Debug\Factorizor.UI.csproj.CoreCompileInputs.cache
+C:\Users\jeremywakefield\source\repos\ClassLibrary1\ClassLibrary1\bin\Debug\ClassLibrary1.pdb
+C:\Users\jeremywakefield\source\repos\ClassLibrary1\ClassLibrary1\bin\Debug\ClassLibrary3.dll
+C:\Users\jeremywakefield\source\repos\ClassLibrary1\ClassLibrary1\bin\Debug\ClassLibrary3.pdb
+C:\Users\jeremywakefield\source\repos\ClassLibrary1\ClassLibrary1\obj\Debug\Factorizor.UI.csproj.CopyComplete
+C:\Users\jeremywakefield\source\repos\ClassLibrary1\ClassLibrary1\obj\Debug\ClassLibrary1.pdb
+C:\Users\jeremywakefield\source\repos\ClassLibrary1\ClassLibrary1\bin\Debug\ClassLibrary1.exe
+C:\Users\jeremywakefield\source\repos\ClassLibrary1\ClassLibrary1\obj\Debug\ClassLibrary1.exe
