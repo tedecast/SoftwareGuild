@@ -7,3 +7,11 @@ Z:\Downloads\LINQExercises\LINQ\obj\Debug\LINQ.csprojAssemblyReference.cache
 Z:\Downloads\LINQExercises\LINQ\obj\Debug\LINQ.csproj.CoreCompileInputs.cache
 Z:\Downloads\LINQExercises\LINQ\obj\Debug\LINQ.exe
 Z:\Downloads\LINQExercises\LINQ\obj\Debug\LINQ.pdb
+Z:\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\LINQExercises\LINQ\bin\Debug\Customers.xml
+Z:\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\LINQExercises\LINQ\bin\Debug\LINQ.exe.config
+Z:\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\LINQExercises\LINQ\bin\Debug\LINQ.exe
+Z:\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\LINQExercises\LINQ\bin\Debug\LINQ.pdb
+Z:\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\LINQExercises\LINQ\obj\Debug\LINQ.csprojAssemblyReference.cache
+Z:\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\LINQExercises\LINQ\obj\Debug\LINQ.csproj.CoreCompileInputs.cache
+Z:\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\LINQExercises\LINQ\obj\Debug\LINQ.exe
+Z:\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\LINQExercises\LINQ\obj\Debug\LINQ.pdb

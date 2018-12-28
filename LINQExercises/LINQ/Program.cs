@@ -20,7 +20,7 @@ namespace LINQ
 			//Exercise7();
 			//Exercise8();
 			//Exercise9();
-			//Exercise10();
+			Exercise10();
 			//Exercise11();
 			//Exercise12();
 			//Exercise13();
@@ -291,6 +291,10 @@ namespace LINQ
 		static void Exercise10()
         {
 			var customers = DataLoader.LoadCustomers();
+			var fivehundred = customers.Where(customer => customer.Orders.Any(order => order.Total < 500M));
+			PrintCustomerInformation(fivehundred);
+			
+			/*var customers = DataLoader.LoadCustomers();
 			foreach (var customer in customers)
 			{
 				decimal total = 0M;
@@ -303,7 +307,7 @@ namespace LINQ
 				{
 					Console.WriteLine(customer.CustomerID);
 				}
-			}
+			}*/
 		}
 
 		/// <summary>
