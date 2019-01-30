@@ -1,0 +1,11 @@
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SGBank.BL\bin\Debug\ClassLibrary1.dll
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SGBank.BL\bin\Debug\ClassLibrary1.pdb
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SGBank.BL\obj\Debug\SGBank.BLL.csprojAssemblyReference.cache
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SGBank.BL\obj\Debug\SGBank.BLL.csproj.CoreCompileInputs.cache
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SGBank.BL\obj\Debug\SGBank.BLL.csproj.CopyComplete
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SGBank.BL\bin\Debug\SGBank.BLL.dll
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SGBank.BL\bin\Debug\SGBank.BLL.pdb
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SGBank.BL\obj\Debug\SGBank.BLL.dll
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SGBank.BL\obj\Debug\SGBank.BLL.pdb
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SGBank.BL\bin\Debug\SGBank.Models.dll
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SGBank.BL\bin\Debug\SGBank.Models.pdb

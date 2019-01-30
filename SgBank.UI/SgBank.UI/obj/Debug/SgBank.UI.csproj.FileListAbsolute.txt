@@ -1,0 +1,14 @@
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SgBank.UI\bin\Debug\SgBank.UI.exe.config
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SgBank.UI\bin\Debug\SgBank.UI.exe
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SgBank.UI\bin\Debug\SgBank.UI.pdb
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SgBank.UI\obj\Debug\SgBank.UI.csprojAssemblyReference.cache
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SgBank.UI\obj\Debug\SgBank.UI.csproj.CoreCompileInputs.cache
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SgBank.UI\obj\Debug\SgBank.UI.csproj.CopyComplete
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SgBank.UI\obj\Debug\SgBank.UI.exe
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SgBank.UI\obj\Debug\SgBank.UI.pdb
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SgBank.UI\bin\Debug\SGBank.BLL.dll
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SgBank.UI\bin\Debug\ClassLibrary1.dll
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SgBank.UI\bin\Debug\SGBank.BLL.pdb
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SgBank.UI\bin\Debug\ClassLibrary1.pdb
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SgBank.UI\bin\Debug\SGBank.Models.dll
+C:\Users\jeremywakefield\source\repos\SgBank.UI\SgBank.UI\bin\Debug\SGBank.Models.pdb
