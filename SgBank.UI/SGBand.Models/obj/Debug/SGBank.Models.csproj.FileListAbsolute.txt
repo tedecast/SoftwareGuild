@@ -4,3 +4,9 @@ C:\Users\jeremywakefield\source\repos\SgBank.UI\SGBand.Models\bin\Debug\SGBank.M
 C:\Users\jeremywakefield\source\repos\SgBank.UI\SGBand.Models\bin\Debug\SGBank.Models.pdb
 C:\Users\jeremywakefield\source\repos\SgBank.UI\SGBand.Models\obj\Debug\SGBank.Models.dll
 C:\Users\jeremywakefield\source\repos\SgBank.UI\SGBand.Models\obj\Debug\SGBank.Models.pdb
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\SGBand.Models\bin\Debug\SGBank.Models.dll
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\SGBand.Models\bin\Debug\SGBank.Models.pdb
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\SGBand.Models\obj\Debug\SGBank.Models.csprojAssemblyReference.cache
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\SGBand.Models\obj\Debug\SGBank.Models.csproj.CoreCompileInputs.cache
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\SGBand.Models\obj\Debug\SGBank.Models.dll
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\SGBand.Models\obj\Debug\SGBank.Models.pdb

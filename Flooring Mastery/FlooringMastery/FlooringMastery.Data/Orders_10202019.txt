@@ -1,0 +1,2 @@
+Order Number, Customer Name, State, Tax Rate, Product Type, Area, Cost Per Square Foot, Labor Cost Per Square Foot, Material Cost, Labor Cost, Tax, Total 
+0,Jeremy,OH,6.25,Tile,1000,3.50,4.15,3500.00,4150.00,478.125000,8128.125000

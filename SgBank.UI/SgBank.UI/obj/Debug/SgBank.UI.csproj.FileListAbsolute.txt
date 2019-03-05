@@ -12,3 +12,17 @@ C:\Users\jeremywakefield\source\repos\SgBank.UI\SgBank.UI\bin\Debug\SGBank.BLL.p
 C:\Users\jeremywakefield\source\repos\SgBank.UI\SgBank.UI\bin\Debug\ClassLibrary1.pdb
 C:\Users\jeremywakefield\source\repos\SgBank.UI\SgBank.UI\bin\Debug\SGBank.Models.dll
 C:\Users\jeremywakefield\source\repos\SgBank.UI\SgBank.UI\bin\Debug\SGBank.Models.pdb
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\SgBank.UI\bin\Debug\SgBank.UI.exe.config
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\SgBank.UI\bin\Debug\SgBank.UI.exe
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\SgBank.UI\bin\Debug\SgBank.UI.pdb
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\SgBank.UI\bin\Debug\ClassLibrary1.dll
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\SgBank.UI\bin\Debug\SGBank.BLL.dll
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\SgBank.UI\bin\Debug\SGBank.Models.dll
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\SgBank.UI\bin\Debug\ClassLibrary1.pdb
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\SgBank.UI\bin\Debug\SGBank.Models.pdb
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\SgBank.UI\bin\Debug\SGBank.BLL.pdb
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\SgBank.UI\obj\Debug\SGBank.UI.csprojAssemblyReference.cache
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\SgBank.UI\obj\Debug\SGBank.UI.csproj.CoreCompileInputs.cache
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\SgBank.UI\obj\Debug\SGBank.UI.csproj.CopyComplete
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\SgBank.UI\obj\Debug\SgBank.UI.exe
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\SgBank.UI\obj\Debug\SgBank.UI.pdb

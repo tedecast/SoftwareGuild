@@ -7,3 +7,12 @@ C:\Users\jeremywakefield\source\repos\SgBank.UI\ClassLibrary1\obj\Debug\ClassLib
 C:\Users\jeremywakefield\source\repos\SgBank.UI\ClassLibrary1\obj\Debug\ClassLibrary1.pdb
 C:\Users\jeremywakefield\source\repos\SgBank.UI\ClassLibrary1\bin\Debug\SGBank.Models.dll
 C:\Users\jeremywakefield\source\repos\SgBank.UI\ClassLibrary1\bin\Debug\SGBank.Models.pdb
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\ClassLibrary1\bin\Debug\ClassLibrary1.dll
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\ClassLibrary1\bin\Debug\ClassLibrary1.pdb
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\ClassLibrary1\bin\Debug\SGBank.Models.dll
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\ClassLibrary1\bin\Debug\SGBank.Models.pdb
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\ClassLibrary1\obj\Debug\SGBank.Data.csprojAssemblyReference.cache
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\ClassLibrary1\obj\Debug\SGBank.Data.csproj.CoreCompileInputs.cache
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\ClassLibrary1\obj\Debug\SGBank.Data.csproj.CopyComplete
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\ClassLibrary1\obj\Debug\ClassLibrary1.dll
+\\Mac\Home\Desktop\SoftwareGuild\Bitbucket\jeremy-wakefield-individual-work\SgBank.UI\ClassLibrary1\obj\Debug\ClassLibrary1.pdb

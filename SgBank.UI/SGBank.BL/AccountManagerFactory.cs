@@ -13,6 +13,7 @@ namespace SGBank.BLL
 		public static AccountManager Create()
 		{
 			string mode = ConfigurationManager.AppSettings["Mode"].ToString();
+			string filePath = ConfigurationManager.AppSettings["filePath"].ToString();
 
 			switch(mode)
 			{
@@ -23,7 +24,7 @@ namespace SGBank.BLL
 				case "PremiumTest":
 					return new AccountManager(new PremiumAccountTestRepository());
 				case "LoadFile":
-					return new AccountManager(new FileAccountRepository(@"C:\Users\jeremywakefield\source\repos\SgBank.UI\Accounts.txt"));
+					return new AccountManager(new FileAccountRepository(filePath));
 				default:
 					throw new Exception("Mode value in app config is not valid");
 			}

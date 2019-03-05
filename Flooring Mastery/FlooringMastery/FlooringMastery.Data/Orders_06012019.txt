@@ -1,0 +1,4 @@
+Order Number, Customer Name, State, Tax Rate, Product Type, Area, Cost Per Square Foot, Labor Cost Per Square Foot, Material Cost, Labor Cost, Tax, Total 
+0,Jeremy,MI,5.75,Carpet,101,2.25,2.10,227.25,212.10,25.262625,464.612625
+1,Josh,OH,6.25,Carpet,100,2.25,2.10,515.00,475.00,56.925000,1046.925000
+2,Jeremy,OH,6.25,Tile,1000,3.50,4.15,3500.00,4150.00,478.125000,8128.125000
