@@ -167,24 +167,62 @@ namespace FlooringMastery.UI
 			}
 
 		}
-		public static bool checkDate(string orderDate)
+		public static string OrderEditPrompt(string message, int orderNumber, Response response)
 		{
-			DateTime s;
-			if (DateTime.TryParseExact(orderDate, "mm/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture,
-		System.Globalization.DateTimeStyles.None, out s))
-				return true;
+			switch (message)
+			{
+				case "customer name":
+					Console.WriteLine($"Enter {message} ({response.Orders[orderNumber].CustomerName})");
+					string input = Console.ReadLine();
+					if (ConsoleIO.isNull(input))
+					{
+						return response.order.CustomerName;
+					}
+					return input;
 
-			
-			return false;
+				case "state":
+					Console.WriteLine($"Enter {message} ({response.Orders[orderNumber].State})");
+					input = Console.ReadLine();
+					if (ConsoleIO.isNull(input))
+					{
+						return response.order.State;
+					}
+					return input;
+
+				case "product type":
+					Console.WriteLine($"Enter {message} ({response.Orders[orderNumber].ProductType})");
+					input = Console.ReadLine();
+					if (ConsoleIO.isNull(input))
+					{
+						return response.order.ProductType;
+					}
+					return input;
+
+				case "area":
+					Console.WriteLine($"Enter {message} ({response.Orders[orderNumber].Area})");
+					input = Console.ReadLine();
+					if (ConsoleIO.isNull(input))
+					{
+						return response.order.Area.ToString();
+					}
+					return input;
+
+				default:
+					throw new Exception("An error occurred.");
+
+			}
 		}
+			public static bool checkDate(string orderDate)
+			{
+				DateTime s;
+				if (DateTime.TryParseExact(orderDate, "mm/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture,
+			System.Globalization.DateTimeStyles.None, out s))
+					return true;
 
-		/*public static Response CheckInput(string date, Response response)
-		{
-			if (date == "" || response.o)
 
-			//logic 
-			
-		}*/
+				return false;
+			}
+		
 	}
 }
 

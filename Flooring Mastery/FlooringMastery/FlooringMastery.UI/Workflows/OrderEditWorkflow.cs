@@ -62,10 +62,10 @@ namespace FlooringMastery.UI.Workflows
 
 					response = manager.LookupOrder(orderDate);
 					response.order = response.Orders[orderNumber];
-					response.order.CustomerName = OrderEditPrompt("customer name", orderNumber, response);
-					response.order.State = OrderEditPrompt("state", orderNumber, response);
-					response.order.ProductType = OrderEditPrompt("product type", orderNumber, response);
-					string area = OrderEditPrompt("area", orderNumber, response);
+					response.order.CustomerName = ConsoleIO.OrderEditPrompt("customer name", orderNumber, response);
+					response.order.State = ConsoleIO.OrderEditPrompt("state", orderNumber, response);
+					response.order.ProductType = ConsoleIO.OrderEditPrompt("product type", orderNumber, response);
+					string area = ConsoleIO.OrderEditPrompt("area", orderNumber, response);
 					decimal decimalArea;
 					bool isValidArea = Decimal.TryParse(area, out decimalArea);
 
@@ -109,50 +109,6 @@ namespace FlooringMastery.UI.Workflows
 
 		}
 
-		public string OrderEditPrompt(string message, int orderNumber, Response response)
-		{
-			switch (message)
-			{
-				case "customer name":
-					Console.WriteLine($"Enter {message} ({response.Orders[orderNumber].CustomerName})");
-					string input = Console.ReadLine();
-					if (ConsoleIO.isNull(input))
-					{
-						return response.order.CustomerName;
-					}
-					return input;
-
-				case "state":
-					Console.WriteLine($"Enter {message} ({response.Orders[orderNumber].State})");
-					input = Console.ReadLine();
-					if (ConsoleIO.isNull(input))
-					{
-						return response.order.State;
-					}
-					return input;
-
-				case "product type":
-					Console.WriteLine($"Enter {message} ({response.Orders[orderNumber].ProductType})");
-					input = Console.ReadLine();
-					if (ConsoleIO.isNull(input))
-					{
-						return response.order.ProductType;
-					}
-					return input;
-
-				case "area":
-					Console.WriteLine($"Enter {message} ({response.Orders[orderNumber].Area})");
-					input = Console.ReadLine();
-					if (ConsoleIO.isNull(input))
-					{
-						return response.order.Area.ToString();
-					}
-					return input;
-
-				default:
-					throw new Exception("An error occurred.");
-
-			}
 		}
 	}
-}
+
