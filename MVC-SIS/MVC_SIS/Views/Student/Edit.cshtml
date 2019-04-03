@@ -1,0 +1,58 @@
+﻿@model Exercises.Models.Data.Student
+@{
+	ViewBag.Title = "Edit";
+}
+
+<div class="row">
+	<div class="col-xs-12">
+		<h2>Edit Student</h2>
+		@Html.ActionLink("Return to List", "List", "Student")
+	</div>
+</div>
+<div class="row">
+	<div>
+		@using (Html.BeginForm())
+		{
+			@Html.HiddenFor(m => m.StudentId);
+
+			<div class="form-group; col-sm-6">
+				<label>First Name</label>
+				@Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "First Name" })
+
+				<label>Last Name</label>
+				@Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Last Name" })
+
+				<label>Major</label>
+				@Html.TextBoxFor(m => m.Major.MajorName, new { @class = "form-control", placeholder = "Major" })
+
+				<label>GPA</label>
+				@Html.TextBoxFor(m => m.GPA, new { @class = "form-control", placeholder = "GPA" })
+
+
+			</div>
+			<div class="form-group; col-sm-6">
+
+				<label>Street 1</label>
+				@Html.TextBoxFor(m => m.Address.Street1, new { @class = "form-control", placeholder = "Street1" })
+
+				<label>Street 2</label>
+				@Html.TextBoxFor(m => m.Address.Street2, new { @class = "form-control", placeholder = "Street2" })
+
+				<label>City</label>
+				@Html.TextBoxFor(m => m.Address.City, new { @class = "form-control", placeholder = "City" })
+
+				<label>State Name</label>
+				@Html.TextBoxFor(m => m.Address.State.StateName, new { @class = "form-control", placeholder = "State Name" })
+
+				<label>State Abbreviation</label>
+				@Html.TextBoxFor(m => m.Address.State.StateAbbreviation, new { @class = "form-control", placeholder = "State Abbreviation" })
+
+				<label>Postal Code</label>
+				@Html.TextBoxFor(m => m.Address.PostalCode, new { @class = "form-control", placeholder = "Postal Code" })
+			</div>
+
+			<button type="submit" class="btn btn-sm btn-primary">Save</button>
+
+		}
+	</div>
+</div>
