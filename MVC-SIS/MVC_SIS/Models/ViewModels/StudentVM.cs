@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -21,8 +22,9 @@ namespace Exercises.Models.ViewModels
             CourseItems = new List<SelectListItem>();
             MajorItems = new List<SelectListItem>();
             StateItems = new List<SelectListItem>();
+
             SelectedCourseIds = new List<int>();
-            Student = new Student();
+			Student = new Student();
         }
 
         public void SetCourseItems(IEnumerable<Course> courses)

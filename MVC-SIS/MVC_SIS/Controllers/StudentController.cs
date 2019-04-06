@@ -28,40 +28,101 @@ namespace Exercises.Controllers
         [HttpGet]
         public ActionResult Add()
         {
-            var viewModel = new StudentVM();
+            var viewModel = new AddStudentViewModel();
             viewModel.SetCourseItems(CourseRepository.GetAll());
             viewModel.SetMajorItems(MajorRepository.GetAll());
             return View(viewModel);
         }
 
         [HttpPost]
-        public ActionResult Add(StudentVM studentVM)
+        public ActionResult Add(AddStudentViewModel viewModel)
         {
-            studentVM.Student.Courses = new List<Course>();
+			if (ModelState.IsValid)
+			{
+				viewModel.Student.Courses = new List<Course>();
 
-            foreach (var id in studentVM.SelectedCourseIds)
-                studentVM.Student.Courses.Add(CourseRepository.Get(id));
+				foreach (var id in viewModel.SelectedCourseId)
+					viewModel.Student.Courses.Add(CourseRepository.Get(id));
 
-            studentVM.Student.Major = MajorRepository.Get(studentVM.Student.Major.MajorId);
+				viewModel.Student.Major = MajorRepository.Get(viewModel.MajorId);
+				viewModel.Student.FirstName = viewModel.FirstName;
+				viewModel.Student.LastName = viewModel.LastName;
+				viewModel.Student.GPA = viewModel.GPA;
 
-            StudentRepository.Add(studentVM.Student);
-
-            return RedirectToAction("List");
+				StudentRepository.Add(viewModel.Student);
+				return RedirectToAction("List");
+			}
+			else
+			{
+				viewModel.SetCourseItems(CourseRepository.GetAll());
+				viewModel.SetMajorItems(MajorRepository.GetAll());
+				return View(viewModel);
+			}
         }
 
 		[HttpGet]
 		public ActionResult Edit(int id)
 		{
+
 			var student = StudentRepository.Get(id);
-			return View(student);
+			var viewModel = new EditStudentViewModel();
+
+			viewModel.MajorId = student.Major.MajorId;
+			viewModel.Student.StudentId = student.StudentId;
+			viewModel.FirstName = student.FirstName;
+			viewModel.LastName = student.LastName;
+			viewModel.GPA = student.GPA;
+
+			viewModel.Street1 = student.Address.Street1;
+			viewModel.Street2 = student.Address.Street2;
+			viewModel.City = student.Address.City;
+			viewModel.PostalCode = student.Address.PostalCode;
+			viewModel.StateName = student.Address.State.StateName;
+			viewModel.StateAbbreviation = student.Address.State.StateAbbreviation;
+
+			viewModel.SetStateItems(StateRepository.GetAll());
+			viewModel.SetCourseItems(CourseRepository.GetAll());
+			viewModel.SetMajorItems(MajorRepository.GetAll());
+			viewModel.SelectedCourseId = student.Courses.Select(m => m.CourseId).ToList();
+			return View(viewModel);
 		}
 
 		[HttpPost]
-		public ActionResult Edit(Student student)
+		public ActionResult Edit(EditStudentViewModel viewModel)
 		{
-			StudentRepository.Edit(student);
-			StudentRepository.SaveAddress(student.StudentId, student.Address);
-			return RedirectToAction("List");
+			if (ModelState.IsValid)
+			{
+				viewModel.Student.Courses = new List<Course>();
+				viewModel.Student.Address = new Address();
+				viewModel.Student.Address.State = new State();
+
+				viewModel.Student.Major = MajorRepository.Get(viewModel.MajorId);
+				viewModel.Student.FirstName = viewModel.FirstName;
+				viewModel.Student.LastName = viewModel.LastName;
+				viewModel.Student.GPA = viewModel.GPA;
+				viewModel.Student.Address.Street1 = viewModel.Street1;
+				viewModel.Student.Address.Street2 = viewModel.Street2;
+				viewModel.Student.Address.City = viewModel.City;
+				viewModel.Student.Address.State.StateName = viewModel.StateName;
+				viewModel.Student.Address.State.StateAbbreviation = viewModel.StateAbbreviation;
+				viewModel.Student.Address.PostalCode = viewModel.PostalCode;
+
+				StudentRepository.Edit(viewModel.Student);
+				StudentRepository.SaveAddress(viewModel.Student.StudentId, viewModel.Student.Address);
+
+				foreach (var id in viewModel.SelectedCourseId)
+					viewModel.Student.Courses.Add(CourseRepository.Get(id));
+				return RedirectToAction("List");
+			}
+			else
+			{
+				viewModel.SetCourseItems(CourseRepository.GetAll());
+				viewModel.SetMajorItems(MajorRepository.GetAll());
+				viewModel.SetStateItems(StateRepository.GetAll());
+
+				return View(viewModel);
+			}
+
 
 		}
 
