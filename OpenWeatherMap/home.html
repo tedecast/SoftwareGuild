@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Weather</title>
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.css"
+              rel="stylesheet">
+        <link href="css/home.css"
+              rel="stylesheet">
+
+              <meta charset="utf-8"/>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row"> 
+                <h1></h1>
+            </div>
+           
+            <ul class="list-group" id="errorMessages"></ul>
+           
+            <div class="row, col-md-12" id="header">
+                <h1>Weather Page</h1>
+                <hr/>
+            </div>
+
+            <div class="row, col-md-12, col-md-offset-3" id="search-bar">
+                
+                <form class="form-group row" id="get-weather-form">
+
+                    <div class="col-md-4">
+                        <label for="zipcode">Zipcode: </label>
+                        <input type="text" class="form=control" placeholder="Enter zipcode..." id="zipcode" required pattern="^\d{5}$"/>
+                    </div>
+
+                    <div class="col-md-2">
+                        <select id="search-dropdown">
+                             <option value="Imperial" selected="selected">Imperial</option>
+                             <option value="Metric">Metric</option>
+                        </select>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button"
+                            id="get-weather-button"
+                            class="btn btn-default">
+                            Get Weather
+                        </button>
+                    </div>
+                </form>
+            </div>
+<hr/>
+            <div id="weather-info" style="display: none">
+                <div class="row, col-md-12" id="current-weather">
+                    <h2 id="current-weather-city"> Current Conditions in </h2>
+                    <div class="col-md-3" id="current-weather-description">  
+                    <div><h1></h1></div>                      
+                        <div class="col-md-6" id="current-weather-image">
+
+                        </div>
+                        <div class="col-md-6"><p id="current-weather-info"></p></div>
+                    </div>
+                    <div class="col-md-3" id="current-weather-conditions">
+                         <div>
+                            <p id="current-weather-temp">Temperature: </p>
+                            <p id="current-weather-humidity">Humidity: </p>
+                            <p id="current-weather-wind">Wind: </p>
+                        </div>
+                    </div>
+                </div>        
+
+        <div class="row, col-md-12" id="five-day-forecast">
+            <h2>Five Day Forecast</h2>
+            <div id="five-day-container">
+                <div class="col-md-2" id="five-day-1"></div>
+                <div class="col-md-2" id="five-day-2"></div>
+                <div class="col-md-2" id="five-day-3"></div>
+                <div class="col-md-2" id="five-day-4"></div>
+                <div class="col-md-2" id="five-day-5"></div>
+            </div>
+        </div>
+    </div>         
+</div>
+        <!-- #5: Placed at the end of the document so the pages load faster -->
+        <script src="js/jquery-2.2.4.min.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/home.js"></script>
+    </body>
+</html>
