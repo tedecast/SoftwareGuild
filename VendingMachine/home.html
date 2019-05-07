@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vending Machine</title>
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/home.css" rel="stylesheet">
+
+        <meta charset="utf-8"/>
+
+    </head>
+    <body>
+        <div class="container">
+            <div>
+                <h1 id="mainHeading">Vending Machine</h1>
+            </div>
+        <hr/>
+<div class="col-md-12"  id="vendingDiv" style="width:70%">
+    <div class="row, col-md-offset-2" >
+        <div class="col-md-3, square" id="grid-1">
+        </div>
+        <div class="col-md-3, square" id="grid-2"></div>
+        <div class="col-md-3, square" id="grid-3"></div>
+    </div>
+    <div class="row, col-md-offset-2">
+        <div class="col-md-4, square" id="grid-4"></div>
+        <div class="col-md-4, square" id="grid-5"></div>
+        <div class="col-md-4, square" id="grid-6"></div>
+    </div>
+    <div class="row, col-md-offset-2">
+        <div class="col-md-4, square" id="grid-7"></div>
+        <div class="col-md-4, square" id="grid-8"></div>
+        <div class="col-md-4, square" id="grid-9"></div>
+    </div>
+</div>
+
+<div class="col-md-12" style="width: 30%; text-align: center">
+    <div>
+        <h3>Total $ In</h3>
+        <input type="text" id="total-amount" disabled="disabled"/>
+        <div class="row">
+            <button class="btn btn-default, add-button" value="1.00">Add Dollar</button>
+            <button class="btn btn-default, add-button" value=".25">Add Quarter</button>
+        </div>
+        <div class="row">
+            <button class="btn btn-default, add-button" value=".10">Add Dime</button>
+            <button class="btn btn-default, add-button" value=".05">Add Nickel</button>
+        </div>
+    </div>
+<hr/>
+    <div>
+        <h3>Messages</h3>
+        <input type="text" id="message-result" disabled="disabled"/>
+        <form><label>Item:</label><input type="text" size="15" disabled="disabled" id="make-purchase-id"/></form>
+        <button class="btn btn-default, make-purchase-button">Make Purchase</button>
+    </div>
+<hr/>
+    <div>
+        <h3>Change</h3>
+        <input id="change-return" disabled="disabled"/>
+        <button class="make-change-button">Change Return</button>
+    </div>
+</div>
+
+        <script src="js/jquery-2.2.4.min.js"></script>
+        <script src="js/home.js"></script>
+    </body>
+</html>
