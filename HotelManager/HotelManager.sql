@@ -3,7 +3,7 @@ GO
 
 if exists (select * from sysdatabases where name='HotelManager')
 		drop database HotelManager
-go
+GO
 
 CREATE DATABASE HotelManager;
 GO
@@ -108,23 +108,17 @@ CREATE TABLE Tax(
 	TaxID INT Identity(1,1) PRIMARY KEY,
 	Tax INT NOT NULL
 )
-CREATE TABLE Bill(
-	BillID INT Identity(1,1) PRIMARY KEY,
-	SubTotal INT NULL,
-	TaxID INT FOREIGN KEY REFERENCES Tax(TaxID) NOT NULL,
-	Total INT NOT NULL
-)
 
-CREATE TABLE BillItem(
-	BillItemID INT Identity(1,1) PRIMARY KEY,
-	BillID INT FOREIGN KEY REFERENCES Bill(BillID) NOT NULL,
+CREATE TABLE BillDetails(
+	BillDetailsID INT Identity(1,1) PRIMARY KEY,
 	ReservationID INT FOREIGN KEY REFERENCES Reservation(ReservationID) NOT NULL,
-	Price INT NOT NULL
+	TaxID INT FOREIGN KEY REFERENCES Tax(TaxID) NOT NULL,
+	Total Decimal(5,2) NULL,
 )
 
 CREATE TABLE AddOns(
 	AddOnsID INT Identity(1,1) PRIMARY KEY,
-	BillID INT FOREIGN KEY  REFERENCES Bill(BillID) NOT NULL,
+	BillDetailsID INT FOREIGN KEY  REFERENCES BillDetails(BillDetailsID) NOT NULL,
 	Name VARCHAR(30) NULL
 )
 
@@ -167,8 +161,7 @@ INSERT INTO Guest VALUES (1, 'A Wakefield', 8), (1, 'Another Wakefield', 5), (2,
 INSERT INTO RoomReservation VALUES (1,1), (2,2);
 INSERT INTO RoomRate VALUES(8, 100, '2019-1-1', '2019-12-31'), (15, 150,  '2019-1-1', '2019-12-31');
 INSERT INTO Tax VALUES (1.06);
-INSERT INTO Bill VALUES (500, 1, 1), (750,1,1);
-INSERT INTO BillItem VALUES (1,1,1), (2,2,1);
+INSERT INTO BillDetails VALUES (1,1, 500), (2,1, 500);
 INSERT INTO AddOns VALUES (1, 'Movie'), (1, 'Room Service');
 INSERT INTO AddOnRates VALUES(5,  '2019-1-1', '2019-12-31'), (15,  '2019-1-1', '2019-12-31');
 INSERT INTO AddOnAddOnRates VALUES (1,1), (2,2);
