@@ -1,0 +1,56 @@
+﻿@model CarDealership.UI.Models.HomeVM
+@{
+				/**/
+
+				/**/
+
+				/**/
+
+				ViewBag.Title = "Home Page";
+}
+
+<div class="carousel slide" data-ride="carousel">
+	<div class="carousel-inner">
+		<div class="carousel-item active">
+			<div class="jumbotron">
+				<h1>@Model.Specials[0].SpecialTitle</h1>
+				<p class="lead">@Model.Specials[0].SpecialDescription</p>
+				<p><a href="@Url.Action("Specials", "Home")" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+
+			</div>
+		</div>
+		@foreach (var special in Model.Specials.Skip(1))
+		{
+		<div class="carousel-item")>
+			<div class="jumbotron">
+				<h1>@special.SpecialTitle</h1>
+				<p class="lead">@special.SpecialDescription</p>
+				<p><a href="@Url.Action("Specials", "Home")" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+			</div>
+		</div>
+		}
+	</div>
+</div>
+
+<hr />
+<h3 style="margin-bottom: 5%">Featured Vehicles</h3>
+<div class="row">
+	@foreach (var view in Model.Featured)
+	{
+		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+			<a href="@Url.Action("New", "Inventory", new { id = view.VehicleId })">
+				<div class="square">
+					<div class="content">
+						<div class="table">
+							<div class="table-cell">
+								<img src="@Url.Content("~/Images/" + view.PhotoPath )" />
+								<p>@view.Year  @view.MakeName @view.ModelName</p>
+								<p> @view.SalePrice.ToString("C0")</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</a>
+		</div>
+	}
+</div>

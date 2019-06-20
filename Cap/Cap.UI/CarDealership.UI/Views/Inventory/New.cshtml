@@ -1,0 +1,154 @@
+﻿@model CarDealership.UI.Models.InventoryViewModel
+
+@{
+	ViewBag.Title = "New";
+}
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 inventory-header">
+			<h2>New Vehicles</h2>
+		</div>
+	</div>
+
+	@using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal", id="search-form"}))
+	{
+		<div class="row quick-search-top">
+			<div class="col-xs-12">
+				<h6>Quick Search</h6>
+			</div>
+		</div>
+		<div class="row quick-search-middle">
+
+			<div class="col-md-3 col-sm-12">
+				<input type="text" class="form-control" id="search-term" placeholder="Enter make, model or year" required>
+			</div>
+			<div class="col-md-1 col-sm-4 inventory-label">
+				<label for="min-price"><strong>Price</strong></label>
+			</div>
+			<div class="col-md-2 col-sm-4 inventory-dropdown">
+				@Html.DropDownList("min-price", Model.Price, "No Min", new { @class = "form-control block" })
+			</div>
+
+			<div class="col-md-2 col-sm-4 inventory-dropdown">
+				@Html.DropDownList("max-price", Model.Price, "No Max", new { @class = "form-control"})
+			</div>
+			<div class="col-md-1 col-sm-4 inventory-label">
+				<label for="min-price"><strong>Year</strong></label>
+			</div>
+			<div class="col-md-2 col-sm-4 inventory-dropdown">
+				@Html.DropDownList("min-year", Model.Year, "No Min", new { @class = "form-control" })
+			</div>
+
+			<div class="col-md-2 col-sm-4 inventory-dropdown">
+				@Html.DropDownList("max-year", Model.Year, "No Max", new { @class = "form-control" })
+			</div>
+
+		</div>
+		<div class="row quick-search-bottom">
+			<div class="col-md-12 center-block">
+				<button type="submit" id="search-button" class="btn btn-dark">Search</button>
+			</div>
+		</div>
+	}
+
+	<div class="col-xs-12 inventory-results-header">
+		<h2>Search Results</h2>
+	</div>
+
+	@foreach (var vehicle in Model.Vehicles)
+	{
+		<br />
+		<div id="search-results">
+			<div class="row vehicleTitle">
+				<div class="col-xs-12" id="contentRow">
+					<strong><p>@vehicle.Year @vehicle.MakeName @vehicle.ModelName</p></strong>
+				</div>
+			</div>
+			<div class="row vehicleSearchResult">
+				<div class="col-md-3" id="contentRow">
+					<img class="center-block" src="@Url.Content("~/Images/" + vehicle.PhotoPath)" />
+				</div>
+				<div class="col-md-3 searchResultsCell" id="contentRow">
+					<p><strong>Body Style:</strong> @vehicle.BodyType </p>
+					<p><strong>Trans:</strong> @vehicle.TransmissionType</p>
+					<p><strong>Color:</strong> @vehicle.ColorName</p>
+				</div>
+				<div class="col-md-3 searchResultsCell" id="contentRow">
+					<p><strong>Interior:</strong> @vehicle.InteriorColor</p>
+					<p><strong>Mileage:</strong>  @vehicle.TypeName</p>
+					<p><strong>VIN #:</strong> @vehicle.VIN</p>
+				</div>
+				<div class="col-md-3 searchResultsCell" id="contentRow">
+					<p><strong>Sale Price:</strong> @vehicle.SalePrice.ToString("C0")</p>
+					<p><strong>MSRP:</strong> @vehicle.MSRP.ToString("C0")</p>
+					<button type="button" class="btn btn-dark">Details</button>
+				</div>
+			</div>
+		</div>
+	}
+</div>
+
+@section Scripts
+{
+	<script>
+		$(document).ready(function () {
+			$('#search-form').submit(function (e) {
+				search();
+				return false;
+			});
+		});
+
+		function search() {
+			var params;
+
+			params = 'searchTerm=' + $('#search-term').val() + '&minYear=' + $('#min-year').val()
+				+ '&maxYear=' + $('#max-year').val() + '&minPrice=' + $('#min-price').val() + '&maxPrice=' + $('#max-price').val();
+
+			$.ajax({
+				type: 'GET',
+				url: 'http://localhost:60758/inventory/search?' + params,
+				success: function (results) {
+					$('#search-results').empty();
+					var imagePath = '@Url.Content("~/Images/")';
+
+					$.each(results, function (index, vehicle) {
+						var html = 
+							'<div class="row vehicleTitle">' +
+							'<div class="col-xs-12" id="contentRow">' +
+							'<strong><p>' + vehicle.Year + ' ' + vehicle.MakeName + ' ' + vehicle.ModelName + '</p></strong>' +
+							'</div>' +
+							'</div>' +
+							'<div class="row vehicleSearchResult">' +
+							'<div class="col-md-3" id="contentRow">' +
+							'<img class="center-block" src="' + imagePath + vehicle.PhotoPath + '")/>' +
+							'</div>' +
+						'<div class="col-md-3 searchResultsCell" id="contentRow">' +
+							'<p><strong>Body Style:</strong> ' + vehicle.BodyType + ' </p>' +
+							'<p><strong>Trans:</strong> ' + vehicle.TransmissionType + '</p>' +
+							'<p><strong>Color:</strong> ' + vehicle.ColorName + '</p>' +
+							'</div> ' +
+							'<div class="col-md-3 searchResultsCell" id="contentRow">' +
+							'<p><strong>Interior:</strong> ' + vehicle.InteriorColor + '</p>' +
+							'<p><strong>Mileage:</strong> ' + vehicle.TypeName + '</p>' +
+							'<p><strong>VIN #:</strong> ' + vehicle.VIN + '</p>' +
+							'</div>' +
+							'<div class="col-md-3 searchResultsCell" id="contentRow">' +
+							'<p><strong>Sale Price:</strong> $' + vehicle.SalePrice.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' </p>' +
+							'<p><strong>MSRP:</strong> $' + vehicle.MSRP.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</p>' +
+							'<button type="button" class="btn btn-dark">Details</button>' +
+							'</div>' +
+							'</div>';
+
+						$('#search-results').append(html.toString());
+					});
+				},
+				error: function () {
+					alert('Error performing search, try again later!')
+				}
+			});
+		}
+		
+	</script>
+
+
+}

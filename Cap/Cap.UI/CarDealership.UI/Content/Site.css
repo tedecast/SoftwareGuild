@@ -1,0 +1,131 @@
+﻿body {
+    padding-top: 150px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.square {
+	width: 200px;
+	padding-bottom: 200px; /* = width for a 1:1 aspect ratio */
+	margin-left: auto;
+	margin-right:auto;
+	margin-bottom: 10%;
+	overflow: hidden;
+	border: 1px solid black;
+}
+
+.content {
+	position: absolute;
+	height: 200px; /* = 100% - 2*10% padding */
+	width: 200px; /* = 100% - 2*5% padding */
+	padding: 10% 5%;
+	text-align: center;
+}
+
+.table {
+	display: table;
+	height: 100%;
+	width: 100%;
+}
+
+.table-cell {
+	display: table-cell;
+	vertical-align: middle;
+	height: 100%;
+	width: 100%;
+}
+.logo {
+	margin-top: 17%;
+}
+
+.row {
+margin: auto;
+}
+
+.vehicleTitle{
+	padding-left: 2.5%;
+	padding-top: 1.5%;
+	padding-bottom: .5%;
+	border: 1px solid black;
+	border-bottom-width: 0px;
+}
+.vehicleSearchResult {
+	border: 1px solid black;
+	border-top-width: 0px;
+	padding-bottom: 1.5%;
+}
+
+.searchResultsCell {
+	margin: auto;
+	position:relative;
+}
+.center-block {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	text-align: center;
+}
+
+.quick-search-top {
+	border: 1px solid black;
+	border-bottom-width: 0px;
+	padding-top: 1.5%;
+	padding-left:1.5%;
+}
+.quick-search-middle {
+	border: 1px solid black;
+	border-top-width: 0px;
+	border-bottom-width: 0px;
+	padding-top: 1%;
+	padding-bottom: 1.5%;
+
+}
+.quick-search-bottom {
+	border: 1px solid black;
+	border-top-width: 0px;
+	padding-top: 1.5%;
+	padding-bottom: 2%;
+}
+.inventory-dropdown {
+	padding: 0px 5px 0px 0px;
+	max-width: 125px;
+	margin: auto;
+}
+.inventory-label {
+	padding-left: 0px;
+	padding-right: 0px;
+	margin-top: .75%;
+	text-align: right;
+}
+.inventory-results-header {
+	margin-top: 2.5%;
+}
+
+.inventory-header {
+	margin-bottom: 3%;
+}
+
+@media (max-width: 576px) {
+	.inventory-label {
+		text-align: center;
+	}
+}
