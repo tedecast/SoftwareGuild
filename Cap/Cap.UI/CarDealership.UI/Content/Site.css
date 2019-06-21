@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 150px;
+    padding-top: 140px;
     padding-bottom: 20px;
 }
 
@@ -54,7 +54,7 @@ textarea {
 	width: 100%;
 }
 .logo {
-	margin-top: 17%;
+	margin-top: 3%;
 }
 
 .row {
@@ -85,13 +85,13 @@ margin: auto;
 	text-align: center;
 }
 
-.quick-search-top {
+.outline-top {
 	border: 1px solid black;
 	border-bottom-width: 0px;
 	padding-top: 1.5%;
 	padding-left:1.5%;
 }
-.quick-search-middle {
+.outline-middle {
 	border: 1px solid black;
 	border-top-width: 0px;
 	border-bottom-width: 0px;
@@ -99,7 +99,7 @@ margin: auto;
 	padding-bottom: 1.5%;
 
 }
-.quick-search-bottom {
+.outline-bottom {
 	border: 1px solid black;
 	border-top-width: 0px;
 	padding-top: 1.5%;
@@ -128,4 +128,25 @@ margin: auto;
 	.inventory-label {
 		text-align: center;
 	}
+}
+
+.searchResultsDescription {
+	padding-left: 15px;
+}
+
+#map {
+	height: 300px; /* The height is 400 pixels */
+	width: 80%; /* The width is the width of the web page */
+	margin: auto;
+	margin-top: 5%;
+}
+
+#address {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5%;
+	width: 80%;
+
+	font-size: smaller;
+	line-height: .5;
 }

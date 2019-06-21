@@ -1,16 +1,16 @@
 ﻿@model CarDealership.UI.Models.InventoryViewModel
 
 @{
-	ViewBag.Title = "New";
+	ViewBag.Title = "Used";
 }
 <div class="container">
 	<div class="row" id="inventory=header">
 		<div class="col-xs-12 inventory-header">
-			<h2>New Vehicles</h2>
+			<h2>Used Vehicles</h2>
 		</div>
 	</div>
 
-	@using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal", id="search-form"}))
+	@using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal", id = "search-form" }))
 	{
 		<div class="row outline-top">
 			<div class="col-xs-12">
@@ -30,7 +30,7 @@
 			</div>
 
 			<div class="col-md-2 col-sm-4 inventory-dropdown">
-				@Html.DropDownList("max-price", Model.Price, "No Max", new { @class = "form-control"})
+				@Html.DropDownList("max-price", Model.Price, "No Max", new { @class = "form-control" })
 			</div>
 			<div class="col-md-1 col-sm-4 inventory-label">
 				<label for="min-price"><strong>Year</strong></label>
@@ -51,14 +51,15 @@
 		</div>
 	}
 
-	<div class="col-xs-12 inventory-results-header" id="results-header">
-		<h2>Search Results</h2>
-	</div>
+		<div class="col-xs-12 inventory-results-header" id="results-header">
+			<h2>Search Results</h2>
+			<br />
+		</div>
+	<div id="search-results">
 
-	@foreach (var vehicle in Model.Vehicles)
-	{
-		<br />
-		<div id="search-results">
+		@foreach (var vehicle in Model.Vehicles)
+		{
+			<br />
 			<div class="row vehicleTitle">
 				<div class="col-xs-12" id="contentRow">
 					<strong><p>@vehicle.Year @vehicle.MakeName @vehicle.ModelName</p></strong>
@@ -81,11 +82,11 @@
 				<div class="col-md-3 searchResultsCell" id="contentRow">
 					<p><strong>Sale Price:</strong> @vehicle.SalePrice.ToString("C0")</p>
 					<p><strong>MSRP:</strong> @vehicle.MSRP.ToString("C0")</p>
-					<button type="button" onclick="location.href='@Url.Action("details", "inventory", new { id=vehicle.VehicleId})'"  class="btn btn-dark">Details</button>
+					<button type="button" onclick="location.href='@Url.Action("details", "inventory", new { id=vehicle.VehicleId})'" class="btn btn-dark">Details</button>
 				</div>
 			</div>
-		</div>
-	}
+		}
+	</div>
 </div>
 
 @section Scripts
@@ -108,13 +109,16 @@
 
 			$.ajax({
 				type: 'GET',
-				url: 'http://localhost:60758/inventory/search/new?' + params,
+				url: 'http://localhost:60758/inventory/search/used?' + params,
 				success: function (results) {
 					$('#search-results').empty();
-					var imagePath = '@Url.Content("~/Images/")';
+
+
+					var imagePath = '@Url.Content("~/Images/")';					
 
 					$.each(results, function (index, vehicle) {
-						var html = 
+						
+						var html =
 							'<div class="row vehicleTitle">' +
 							'<div class="col-xs-12" id="contentRow">' +
 							'<strong><p>' + vehicle.Year + ' ' + vehicle.MakeName + ' ' + vehicle.ModelName + '</p></strong>' +
@@ -137,9 +141,9 @@
 							'<div class="col-md-3 searchResultsCell" id="contentRow">' +
 							'<p><strong>Sale Price:</strong> $' + vehicle.SalePrice.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' </p>' +
 							'<p><strong>MSRP:</strong> $' + vehicle.MSRP.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</p>' +
-							'<button type="button" onclick="location.href=\'/inventory/details/' + vehicle.VehicleId + '\'" class="btn btn-dark">Details</button>' +
+							'<button type="button" onclick="location.href=\'/inventory/details/'  + vehicle.VehicleId + '\'" class="btn btn-dark">Details</button>' +
 							'</div>' +
-							'</div>';
+							'</div> <br/>';
 
 						$('#search-results').append(html.toString());
 					});
@@ -149,6 +153,6 @@
 				}
 			});
 		}
-		
+
 	</script>
 }

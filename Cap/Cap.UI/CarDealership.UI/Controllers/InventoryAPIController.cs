@@ -1,4 +1,5 @@
-﻿using CarDealership.Models.Queries;
+﻿using CarDealership.BLL;
+using CarDealership.Models.Queries;
 using CarDealership.UI.Factories;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace CarDealership.UI.Controllers
 		}
 
 
-		[Route("inventory/details/{id}")]
+		/*[Route("inventory/details/{id}")]
 		[AcceptVerbs("GET")]
 		public IHttpActionResult GetbyId(int id)
 		{
@@ -36,11 +37,11 @@ namespace CarDealership.UI.Controllers
 			{
 				return Ok(vehicle);
 			}
-		}
+		}*/
 
-		[Route("inventory/search/")]
+		[Route("inventory/search/new")]
 		[AcceptVerbs("GET")]
-		public IHttpActionResult GetbySearch(string searchTerm, int? minPrice, int?maxPrice, int?minYear, int?maxYear)
+		public IHttpActionResult GetNewBySearch(string searchTerm, int? minPrice, int?maxPrice, int?minYear, int?maxYear)
 		{
 			SearchItem parameters = new SearchItem()
 			{
@@ -60,7 +61,35 @@ namespace CarDealership.UI.Controllers
 			}
 			else
 			{
-				return Ok(vehicle);
+				var filteredVehicles = FilterInventory.NewInventory(vehicle);
+				return Ok(filteredVehicles);
+			}
+		}
+
+		[Route("inventory/search/used")]
+		[AcceptVerbs("GET")]
+		public IHttpActionResult GetUsedBySearch(string searchTerm, int? minPrice, int? maxPrice, int? minYear, int? maxYear)
+		{
+			SearchItem parameters = new SearchItem()
+			{
+				SearchTerm = searchTerm,
+				MinPrice = minPrice,
+				MaxPrice = maxPrice,
+				MinYear = minYear,
+				MaxYear = maxYear
+			};
+
+			var repo = VehicleRepositoryFactory.GetRepository();
+			List<VehicleItem> vehicle = repo.GetVehicleBySearch(parameters);
+
+			if (vehicle == null)
+			{
+				return NotFound();
+			}
+			else
+			{
+				var filteredVehicles = FilterInventory.UsedInventory(vehicle);
+				return Ok(filteredVehicles);
 			}
 		}
 	}

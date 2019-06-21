@@ -1,0 +1,45 @@
+﻿@model CarDealership.Models.Queries.VehicleItem
+@{
+	ViewBag.Title = "Details";
+}
+
+<h2>Vehicle Details</h2>
+
+<br />
+<div id="search-results">
+	<div class="row vehicleTitle outline-top">
+		<div class="col-xs-12" id="contentRow">
+			<strong><p> @Model.Year @Model.MakeName @Model.ModelName</p></strong>
+		</div>
+	</div>
+	<div class="row vehicleSearchResult outline-middle">
+		<div class="col-md-3" id="contentRow">
+			<img class="center-block" src="@Url.Content("~/Images/" + Model.PhotoPath)" />
+		</div>
+		<div class="col-md-3 searchResultsCell" id="contentRow">
+			<p><strong>Body Style:</strong> @Model.BodyType </p>
+			<p><strong>Trans:</strong> @Model.TransmissionType</p>
+			<p><strong>Color:</strong> @Model.ColorName</p>
+		</div>
+		<div class="col-md-3 searchResultsCell" id="contentRow">
+			<p><strong>Interior:</strong> @Model.InteriorColor</p>
+			<p><strong>Mileage:</strong>  @Model.TypeName</p>
+			<p><strong>VIN #:</strong> @Model.VIN</p>
+		</div>
+		<div class="col-md-3 searchResultsCell" id="contentRow" style="margin-top: 0px">
+			<p><strong>Sale Price:</strong> @Model.SalePrice.ToString("C0")</p>
+			<p><strong>MSRP:</strong> @Model.MSRP.ToString("C0")</p>
+		</div>
+	</div>
+	<div class="row vehicleSearchResult outline-middle">
+		<div class="col-xs-9 offset-3 searchResultsDescription">
+			<p> <strong>Description:</strong> @Model.Description </p>
+		</div>
+	</div>
+	<div class="row vehicleSearchResult outline-bottom">
+		<div class="col-xs-2 offset-10">
+			<button type="button" onclick="location.href='@Url.Action("vin", "contactus", new { VIN=Model.VIN})'"  class="btn btn-dark">Contact Us</button>
+		</div>
+	</div>
+</div>
+

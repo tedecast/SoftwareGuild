@@ -14,18 +14,24 @@ namespace CarDealership.UI.Models
 		public List<VehicleItem> Vehicles { get; set; }
 		public List<SelectListItem> Year { get; set; }
 		public List<SelectListItem> Price { get; set; }
+		public bool New { get; set; }
 
 		public InventoryViewModel()
 		{
 			Vehicles = new List<VehicleItem>();
 			Year = new List<SelectListItem>();
 			Price = new List<SelectListItem>();
+			New = new bool();
 		}
 
-		public void Populate()
+		public void Populate(bool New)
 		{
 			var repo = VehicleRepositoryFactory.GetRepository();
-			Vehicles = FilterInventory.NewInventory(repo);
+			if(New)
+				Vehicles = FilterInventory.NewInventory(repo.GetAll());
+			else
+				Vehicles = FilterInventory.UsedInventory(repo.GetAll());
+
 			for (int i = 2000; i <= DateTime.Now.Year; i++)
 			{
 				var year = new SelectListItem { Value = i.ToString(), Text = i.ToString() };

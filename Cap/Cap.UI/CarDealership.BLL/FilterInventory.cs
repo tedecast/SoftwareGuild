@@ -12,19 +12,17 @@ namespace CarDealership.BLL
 {
 	public class FilterInventory
 	{
-		public static List<VehicleItem> NewInventory(IVehicleRepository vRepo)
+		public static List<VehicleItem> NewInventory(List<VehicleItem> inventory)
 		{
 
-			var inventory = vRepo.GetAll();
 			List<VehicleItem> filteredInventory = inventory.Where(x => x.TypeName == "New").ToList();
 
 			return filteredInventory;
 		}
 
-		public static List<VehicleItem> UsedInventory(IVehicleRepository vRepo)
+		public static List<VehicleItem> UsedInventory(List<VehicleItem> inventory)
 		{
 
-			var inventory = vRepo.GetAll();
 			List<VehicleItem> filteredInventory = inventory.Where(x => x.TypeName == "Used").ToList();
 
 			return filteredInventory;
