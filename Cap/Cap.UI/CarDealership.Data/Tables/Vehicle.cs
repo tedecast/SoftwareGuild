@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,5 +26,6 @@ namespace CarDealership.Models.Tables
 		public string PhotoPath { get; set; }
 		public bool IsSold { get; set; }
 		public bool IsFeatured { get; set; }
+		public bool IsDeleted { get; set; }
 	}
 }

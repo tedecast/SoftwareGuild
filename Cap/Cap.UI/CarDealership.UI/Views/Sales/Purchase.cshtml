@@ -1,0 +1,119 @@
+﻿@model CarDealership.UI.Models.PurchaseViewModel
+
+@{
+	/**/
+
+	ViewBag.Title = "Purchase";
+}
+
+<h2>Purchase Vehicle</h2>
+
+<div id="purchase-results">
+	<div class="row vehicleTitle outline-top">
+		<div class="col-xs-12" id="contentRow">
+			<strong><p> @Model.Vehicle.Year @Model.Vehicle.MakeName @Model.Vehicle.ModelName</p></strong>
+		</div>
+	</div>
+	<div class="row vehicleSearchResult outline-middle">
+		<div class="col-md-3" id="contentRow">
+			<img class="center-block" src="@Url.Content("~/Images/" + Model.Vehicle.PhotoPath)" />
+		</div>
+		<div class="col-md-3 searchResultsCell" id="contentRow">
+			<p><strong>Body Style:</strong> @Model.Vehicle.BodyType </p>
+			<p><strong>Trans:</strong> @Model.Vehicle.TransmissionType</p>
+			<p><strong>Color:</strong> @Model.Vehicle.ColorName</p>
+		</div>
+		<div class="col-md-3 searchResultsCell" id="contentRow">
+			<p><strong>Interior:</strong> @Model.Vehicle.InteriorColor</p>
+			<p><strong>Mileage:</strong>  @Model.Vehicle.TypeName</p>
+			<p><strong>VIN #:</strong> @Model.Vehicle.VIN</p>
+		</div>
+		<div class="col-md-3 searchResultsCell" id="contentRow" style="margin-top: 0px">
+			<p><strong>Sale Price:</strong> @Model.Vehicle.SalePrice.ToString("C0")</p>
+			<p><strong>MSRP:</strong> @Model.Vehicle.MSRP.ToString("C0")</p>
+		</div>
+	</div>
+	<div class="row vehicleSearchResult outline-bottom">
+		<div class="col-xs-9 offset-3 searchResultsDescription">
+			<p> <strong>Description:</strong> @Model.Vehicle.Description </p>
+		</div>
+	</div>
+</div>
+
+
+@using (Html.BeginForm("Purchase", "Sales", FormMethod.Post, new { id = "contact-form", @class = "form-group" }))
+{
+	@Html.ValidationSummary()
+	@Html.Hidden("UserId", Model.Sale.UserId)
+	@Html.Hidden("DateSold", DateTime.Now)
+	@Html.Hidden("VehicleId", Model.Sale.VehicleId)
+
+<div class="row">
+	<div class=" col-4 form-group">
+		<label>Name</label>
+		@Html.TextBoxFor(m => m.Sale.Name, new { Name = "Name", @class = "form-control" })
+	</div>
+	<div class="col-4 form-group">
+		<label>Phone</label>
+		@Html.TextBoxFor(m => m.Sale.Phone, new { Name = "Phone", @class = "form-control" })
+	</div>
+	<div class="col-4 form-group">
+
+	</div>
+</div>
+<div class="row">
+	<div class="col-12 form-group">
+		<label>Email</label>
+		@Html.TextBoxFor(m => m.Sale.Email, new { Name = "Email",@class = "form-control" })
+	</div>
+</div>
+<div class="row">
+	<div class="col-4 form-group">
+		<label>Street 1</label>
+		@Html.TextBoxFor(m => m.Sale.Street1, new { Name = "Street1", @class = "form-control" })
+	</div> <div class="col-4 form-group">
+		<label>Street 2</label>
+		@Html.TextBoxFor(m => m.Sale.Street2, new { Name = "Street2", @class = "form-control" })
+	</div>
+	<div class="col-4 form-group">
+
+	</div>
+</div>
+<div class="row">
+	<div class="col-4 form-group">
+		<label>City:</label>
+		@Html.TextBoxFor(m => m.Sale.City, new { Name = "City", @class = "form-control" })
+	</div>
+	<div class="col-4 sales-state-dropdown">
+		<label>State</label>
+		@Html.DropDownListFor(m => m.Sale.State, Model.States, new { Name = "State", @class = "form-control" })
+	</div>
+	<div class="col-4 form-group">
+
+	</div>
+</div>
+<div class="row">
+	<div class=" col-12 form-group">
+		<label>Zipcode</label>
+		<input type="text" name ="Zipcode" id="Zipcode" class="form-control"
+			   placeholder="Enter Zipcode"
+			   required pattern="^\d{5}$">
+	</div>
+</div>
+
+	<hr />
+	<div class="row">
+		<div class=" col-4 form-group">
+			<label>Purchase Price</label>
+			@Html.TextBoxFor(m => m.Sale.PurchasePrice, new { Name = "PurchasePrice", id="PurchasePrice", @class = "form-control" })
+		</div>
+		<div class="col-4 sales-type-dropdown">
+			<label>Purchase Type</label>
+			@Html.DropDownListFor(m => m.Sale.PurchaseTypeId, Model.PurchaseType, new {Name = "PurchaseTypeId", @class = "form-control" })
+		</div>
+		<div class="col-4 form-group">
+
+		</div>
+	</div>
+	<button type="submit" style="margin-left: 15px" class="btn btn-dark">Save</button>
+}

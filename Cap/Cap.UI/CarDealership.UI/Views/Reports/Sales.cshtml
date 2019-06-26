@@ -1,0 +1,110 @@
+﻿@model CarDealership.UI.Models.ReportViewModel
+@{
+	ViewBag.Title = "Sales";
+}
+
+<div class="row">
+	<div class="col-xs-12 inventory-header">
+		<h2>Sales Report</h2>
+	</div>
+</div>
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal", id = "search-form" }))
+{
+	<div class="row outline-top">
+		<div class="col-xs-12">
+			<h6>Filters</h6>
+		</div>
+	</div>
+	<div class="row outline-middle">
+
+		<div class="col-md-1 col-sm-4 inventory-label">
+			<label for="user"><strong>User</strong></label>
+		</div>
+		<div class="col-md-2 col-sm-4 inventory-dropdown">
+			@Html.DropDownList("user", Model.Users, "- All -", new { @class = "form-control block" })
+		</div>
+		<div class="col-md-1 col-sm-4 inventory-label">
+			<label for="from-date"><strong>From Date</strong></label>
+		</div>
+		<div class="col-md-3 col-sm-12">
+			<input type="text" class="form-control" id="from-date">
+		</div>
+		<div class="col-md-1 col-sm-4 inventory-label">
+			<label for="to-date"><strong>To Date</strong></label>
+		</div>
+		<div class="col-md-3 col-sm-12">
+			<input type="text" class="form-control" id="to-date">
+		</div>
+
+	</div>
+	<div class="row outline-bottom">
+		<div class="col-md-12 center-block">
+			<button type="submit" id="search-button" class="btn btn-dark">Search</button>
+		</div>
+	</div>
+}
+
+
+<div class="row inventory-results-header" id="result-section">
+	<h4>Search Results</h4>
+	<div class="col-12">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>User</th>
+					<th>Total Sales</th>
+					<th>Total Vehicles</th>
+				</tr>
+			</thead>
+			<tbody id="search-results">
+				
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+@section Scripts
+{
+	<script>
+		$(document).ready(function () {
+			$('#result-section').hide();
+			$('#search-form').submit(function (e) {
+				search();
+				return false;
+			});
+
+		});
+
+		function search() {
+			var params;
+
+			params = 'userSelect=' + $('#user').val() + '&fromDate=' + $('#from-date').val()
+				+ '&toDate=' + $('#to-date').val();
+
+			$.ajax({
+				type: 'GET',
+				url: 'http://localhost:60758/Reports/search?' + params,
+				success: function (results) {
+					$('#search-results').empty();
+					$('#result-section').show();
+
+					$.each(results, function (index, user) {
+						var html = '<tr>' +
+							'<td>' + user.FirstName + ' ' + user.LastName + '</td>' +
+							'<td>' + user.TotalSales.toString(C0) + '</td>' +
+							'<td>' + user.TotalVehicles + '</td>' +
+							'</tr>';
+						$('#search-results').append(html.toString());
+					});
+				},
+				error: function () {
+					alert('Error performing search, try again later!')
+				}
+			});
+		}
+
+	</script>
+}

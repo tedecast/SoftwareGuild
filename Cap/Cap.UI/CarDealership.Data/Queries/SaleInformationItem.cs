@@ -9,7 +9,7 @@ namespace CarDealership.Models.Queries
 	public class SaleInformationItem
 	{
 		public int SaleId { get; set; }
-		public string Id { get; set; }
+		public string UserId { get; set; }
 		public int PurchasePrice { get; set; }
 		public int PurchaseTypeId { get; set; }
 		public int VehicleId { get; set; }

@@ -9,9 +9,10 @@ namespace CarDealership.Models.Queries
 	public class InventoryReportItem
 	{
 		public int Year { get; set; }
-		public string Make { get; set; }
-		public string Model { get; set; }
+		public string MakeName { get; set; }
+		public string ModelName { get; set; }
 		public int Count { get; set; }
 		public decimal StockValue { get; set; }
+		public string TypeName { get; set; }
 	}
 }

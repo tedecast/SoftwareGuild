@@ -38,7 +38,20 @@
 	</div>
 	<div class="row vehicleSearchResult outline-bottom">
 		<div class="col-xs-2 offset-10">
-			<button type="button" onclick="location.href='@Url.Action("vin", "contactus", new { VIN=Model.VIN})'"  class="btn btn-dark">Contact Us</button>
+			@{
+				if (Model.IsSold)
+				{
+					<button type="button" class="btn btn-dark">Unavailable - Sold</button>
+
+				}
+
+				else
+				{
+					<button type="button" onclick="location.href='@Url.Action("vin", "contactus", new { VIN = Model.VIN })'" class="btn btn-dark">Contact Us</button>
+
+				}
+			}
+
 		</div>
 	</div>
 </div>

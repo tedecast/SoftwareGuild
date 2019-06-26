@@ -1,0 +1,62 @@
+﻿@model CarDealership.UI.Models.SpecialsViewModel
+
+@{
+	ViewBag.Title = "Specials";
+}
+<div class="row">
+	<div class="col-12">
+		<h2>Specials</h2>
+	</div>
+</div>
+@using (Html.BeginForm("Specials", "Admin", FormMethod.Post, new { id = "contact-form", @class = "form-group" }))
+{
+	<div class="row sales-border">
+
+		<div class="col-2" style="margin-right: 0; margin-left: auto;">
+			<p style="text-align:right">Title</p> 
+			<p style="text-align:right">Description</p>
+		</div>
+		<div class="col-4">
+			@Html.TextBoxFor(m => m.AddSpecial.SpecialTitle, new { required = "required", style="margin-bottom:5%"})
+			<br/>
+			@Html.TextAreaFor(m => m.AddSpecial.SpecialDescription, new { required = "required" })
+			<button style="margin-right: 100%" type="submit" class="btn btn-dark">Submit</button>
+
+		</div>
+		<div class="col-6">
+			
+		</div>
+
+	</div>
+}
+@foreach (var special in Model.Specials)
+{
+		<br />
+
+		<div class="row sales-border">
+			<div class="col-sm-3" id="contentRow">
+				<img class="center-block" src="/Images/special-dollar.png" />
+			</div>
+			<div class="col-sm-9 searchResultsCell" id="contentRow">
+				<div class="row">
+					<div class="col-sm-12">
+						@using (Html.BeginForm("DeleteSpecial", "Admin", FormMethod.Post, new { id = "special-delete-form", @class = "form-group" }))
+						{
+							@Html.Hidden("AddSpecial.SpecialId", special.SpecialId)
+							<button type="submit" id="delete" class="btn btn-danger float-right" onclick="return confirm('Are you sure you want to delete this vehicle?');">Delete</button>
+
+						}
+						@special.SpecialTitle
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						@special.SpecialDescription
+					</div>
+				</div>
+			</div>
+
+		</div>
+	}
+
+

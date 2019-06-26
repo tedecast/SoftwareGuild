@@ -16,7 +16,7 @@ namespace CarDealership.Data.QARepository
 			new Sale
 			{
 				SaleId = 1,
-				Id = "00000000-0000-0000-0000-000000000000",
+				UserId = "00000000-0000-0000-0000-000000000000",
 				PurchaseTypeId = 1,
 				VehicleId = 1,
 				PurchasePrice = 22500,
@@ -33,7 +33,7 @@ namespace CarDealership.Data.QARepository
 			new Sale
 			{
 				SaleId = 2,
-				Id = "00000000-0000-0000-0000-000000000000",
+				UserId = "00000000-0000-0000-0000-000000000000",
 				PurchaseTypeId = 2,
 				VehicleId = 2,
 				PurchasePrice = 18000,
@@ -84,43 +84,43 @@ namespace CarDealership.Data.QARepository
 			List<UserItem> users = userRepo.GetAll();
 
 			var sales = from u in users
-						join s in salesReport on u.Id equals s.Id
+						join s in salesReport on u.UserId equals s.UserId
 						select s;
 
-			if (!string.IsNullOrEmpty(search.User))
+			if (!string.IsNullOrEmpty(search.UserSelect))
 			{
 				 sales = from u in users
-						join s in sales on u.Id equals s.Id
-						where (u.FirstName.ToLower() == search.User.ToLower())
+						join s in sales on u.UserId equals s.UserId
+						 where (u.FirstName.ToLower() == search.UserSelect.ToLower())
 						select s;
 			}
 			if (search.FromDate.HasValue)
 			{ 
 				sales = from u in users
-						join s in sales on u.Id equals s.Id
+						join s in sales on u.UserId equals s.UserId
 						where (s.DateSold >= search.FromDate)
 						select s;
 			}
 			if (search.ToDate.HasValue)
 			{
 				sales = from u in users
-						join s in sales on u.Id equals s.Id
+						join s in sales on u.UserId equals s.UserId
 						where (s.DateSold <= search.ToDate)
 						select s;
 			}
 
 			var filteredSales = from u in users
-								join s in sales on u.Id equals s.Id
-								group s by u.Id;
+								join s in sales on u.UserId equals s.UserId
+								group s by u.UserId;
 
 			var filteredGroup = from s in filteredSales
 								 select new SalesReportItem
 						 {
-							 FirstName = users.Find(x => x.Id == s.Key).FirstName,
-							LastName = users.Find(x => x.Id == s.Key).LastName,
-							FullName = users.Find(x => x.Id == s.Key).FirstName + " " + users.Find(x => x.Id == s.Key).LastName,
-							 TotalSales = s.Where(p => p.Id == s.Key).Sum(x => x.PurchasePrice),
-							 TotalVehicles = s.Where(p => p.Id == s.Key).Count()
+							 FirstName = users.Find(x => x.UserId == s.Key).FirstName,
+							LastName = users.Find(x => x.UserId == s.Key).LastName,
+							FullName = users.Find(x => x.UserId == s.Key).FirstName + " " + users.Find(x => x.UserId == s.Key).LastName,
+							 TotalSales = s.Where(p => p.UserId == s.Key).Sum(x => x.PurchasePrice),
+							 TotalVehicles = s.Where(p => p.UserId == s.Key).Count()
 						 };
 
 			return filteredGroup.ToList();

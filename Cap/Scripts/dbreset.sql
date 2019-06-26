@@ -55,6 +55,11 @@ IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
 GO
 
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
+   WHERE ROUTINE_NAME = 'GetVehicleItemById')
+      DROP PROCEDURE GetVehicleItemById
+GO
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
    WHERE ROUTINE_NAME = 'AddSale')
       DROP PROCEDURE AddSale
 GO
@@ -86,6 +91,10 @@ IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
    WHERE ROUTINE_NAME = 'DeleteSpecial')
       DROP PROCEDURE DeleteSpecial
 GO
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
+   WHERE ROUTINE_NAME = 'GetInventoryReport')
+      DROP PROCEDURE GetInventoryReport
+GO
 CREATE PROCEDURE DbReset
 AS
 	DELETE FROM Special
@@ -100,13 +109,14 @@ AS
 	DELETE FROM PurchaseType
 	DELETE FROM Transmission
 	DELETE FROM [Type]
-	DELETE FROM	AspNetUsers Where id='00000000-0000-0000-0000-000000000000'
-	DELETE FROM	AspNetUsers Where id='00000000-0000-0000-0000-000000000001'
-	DELETE FROM	AspNetUsers Where id='d10dee9d-5dc7-44e3-b550-10cb35982cf5'
+	DELETE FROM	AspNetUsers Where Id='00000000-0000-0000-0000-000000000000'
+	DELETE FROM	AspNetUsers Where Id='00000000-0000-0000-0000-000000000001'
+	DELETE FROM	AspNetUsers Where Id='d10dee9d-5dc7-44e3-b550-10cb35982cf5'
 
-
-	INSERT INTO Special (SpecialTitle, SpecialDescription)
-	VALUES ('Labor Day Sale', '15% Off All New Cars!'), ('Auction Bid Day','Come bid on the largest selection of used vehicles!'), ('New Selection of Luxury Vehicles!','Come check out the latest from Tesla, Audi, BMW and More!')
+	SET IDENTITY_INSERT Special ON 
+	INSERT INTO Special (SpecialId,SpecialTitle, SpecialDescription)
+	VALUES (1, 'Labor Day Sale', '15% Off All New Cars!'), (2, 'Auction Bid Day','Come bid on the largest selection of used vehicles!'), (3, 'New Selection of Luxury Vehicles!','Come check out the latest from Tesla, Audi, BMW and More!')
+	SET IDENTITY_INSERT Special OFF
 
 	SET IDENTITY_INSERT Body ON 
 	INSERT INTO Body (BodyId, BodyType)
@@ -130,7 +140,7 @@ AS
 
 	SET IDENTITY_INSERT Make ON 
 	INSERT INTO Make (MakeId, UserId, MakeName, DateAdded)
-	VALUES (1,'00000000-0000-0000-0000-000000000000', 'Subaru', '1/1/2011'), (2,'00000000-0000-0000-0000-000000000000', 'Ford', '1/1/2012'), (3,'00000000-0000-0000-0000-000000000000', 'Kia', '1/1/2013')
+	VALUES (1,'admin@test.com', 'Subaru', '1/1/2011'), (2,'admin@test.com', 'Ford', '1/1/2012'), (3,'admin@test.com', 'Kia', '1/1/2013')
 	SET IDENTITY_INSERT Make OFF
 
 	SET IDENTITY_INSERT Model ON 
@@ -154,11 +164,11 @@ AS
 	SET IDENTITY_INSERT PurchaseType OFF
 
 	SET IDENTITY_INSERT Vehicle ON 
-	INSERT INTO Vehicle (VehicleId, MakeId, ModelId, InteriorId, ColorId, TypeId, BodyId, TransmissionId, [Year], VIN, Mileage, MSRP, SalePrice, [Description], PhotoPath, isSold, isFeatured)
-	VALUES (1, 3, 3, 3, 1, 1, 4, 1, 2019, '3TMMU4FN2AM023309', 0, 25000.00, 23000.00, 'New Kia for sale', 'inventory-1.jpg', 0, 1), 
-	(2, 2, 2, 2, 4, 2, 3, 2, 2015, 'JT2SW22N7M0049240', 30000, 20000.00, 18000.00, 'Gently used Ford F-150 for sale', 'inventory-2.jpg', 0, 1), 
-	(3, 1, 1, 1, 2, 2, 1, 1, 2011,'1GDHK39KX7E580109', 75000, 13000.00, 12000.00, 'Subaru OutBack for sale. Only one previous owner. Great family car!', 'inventory-3.jpg', 0, 0),
-	(4, 1, 4, 1, 2, 2, 1, 1, 2012,'JH4DA9390MS033554', 80000, 16000, 14000.00, 'Subaru Forester for sale.', 'inventory-4.jpg', 0, 0)
+	INSERT INTO Vehicle (VehicleId, MakeId, ModelId, InteriorId, ColorId, TypeId, BodyId, TransmissionId, [Year], VIN, Mileage, MSRP, SalePrice, [Description], PhotoPath, isSold, isFeatured, isDeleted)
+	VALUES (1, 3, 3, 3, 1, 1, 4, 1, 2019, '3TMMU4FN2AM023309', 0, 25000.00, 23000.00, 'New Kia for sale', 'inventory-1.jpg', 0, 1, 0), 
+	(2, 2, 2, 2, 4, 2, 3, 2, 2015, 'JT2SW22N7M0049240', 30000, 20000.00, 18000.00, 'Gently used Ford F-150 for sale', 'inventory-2.jpg', 0, 1, 0), 
+	(3, 1, 1, 1, 2, 2, 1, 1, 2011,'1GDHK39KX7E580109', 75000, 13000.00, 12000.00, 'Subaru OutBack for sale. Only one previous owner. Great family car!', 'inventory-3.jpg', 0, 0, 0),
+	(4, 1, 4, 1, 2, 2, 1, 1, 2012,'JH4DA9390MS033554', 80000, 16000, 14000.00, 'Subaru Forester for sale.', 'inventory-4.jpg', 0, 0, 0)
 	SET IDENTITY_INSERT Vehicle OFF
 
 	SET IDENTITY_INSERT Sale ON 
@@ -167,8 +177,10 @@ AS
 	(2, '00000000-0000-0000-0000-000000000000', 2, 2, 18000.00, 'James', '5555555555', 'James@gmail.com', '555  Whirlaway Court', '', 'Union', 'Kentucky', '55552', '1/2/2019')
 	SET IDENTITY_INSERT Sale OFF
 
-	INSERT INTO AspNetUsers(Id, RoleId, Email, LockoutEnabled, AccessFailedCount, UserName, FirstName, LastName)
-	VALUES ('00000000-0000-0000-0000-000000000000', 'admin', 'test@test.com', 0, 0, 'Jeremy', 'Test', 'TestSubject')
+	INSERT INTO AspNetUsers(Id, RoleId, Email, EmailConfirmed, PasswordHash, PhoneNumber, PhoneNumberConfirmed, TwoFactorEnabled, LockoutEnabled, AccessFailedCount, UserName, FirstName, LastName)
+	VALUES ('00000000-0000-0000-0000-000000000000', 'admin', 'test@test.com', 1, 'test123', '5555555555', '5555555555', 0,  0, 0, 'Jeremy', 'Test', 'TestSubject')
+
+
 
 GO
 
@@ -204,10 +216,22 @@ AS
 	INNER JOIN [Type] t ON t.TypeId = v.TypeID
 	INNER JOIN Body b ON b.BodyId = v.BodyId
 	INNER JOIN Transmission tr ON tr.TransmissionId = v.TransmissionId
+	WHERE isDeleted = 0
 GO
 
 CREATE PROCEDURE GetVehicleById(
-	@VehicleId INT = 1
+	@VehicleId INT
+)
+AS
+		SELECT  VehicleId, MakeId, ModelId, BodyId, InteriorId, ColorId, TypeId,  TransmissionId,
+			[Year], VIN, Mileage, MSRP, SalePrice, [Description], PhotoPath, isFeatured, isSold
+	FROM Vehicle v
+	WHERE v.VehicleId = @VehicleId AND v.isDeleted = 0
+
+GO
+
+CREATE PROCEDURE GetVehicleItemById(
+	@VehicleId INT
 )
 AS
 		SELECT  VehicleId, m.MakeName, mo.ModelName, b.BodyType, i.InteriorColor, c.ColorName, t.TypeName,  tr.TransmissionType,
@@ -220,7 +244,7 @@ AS
 	INNER JOIN [Type] t ON t.TypeId = v.TypeID
 	INNER JOIN Body b ON b.BodyId = v.BodyId
 	INNER JOIN Transmission tr ON tr.TransmissionId = v.TransmissionId
-	WHERE v.VehicleId = @VehicleId
+	WHERE v.VehicleId = @VehicleId AND v.isDeleted = 0
 
 GO
 
@@ -241,11 +265,12 @@ CREATE PROCEDURE AddVehicle(
 	@Description VARCHAR(300),
 	@PhotoPath NVARCHAR(100),
 	@isSold BIT,
-	@isFeatured BIT
+	@isFeatured BIT,
+	@isDeleted BIT = 0
 )
 AS
-	INSERT INTO Vehicle(MakeId, ModelId, InteriorId, ColorId, TypeID, BodyId, TransmissionId, [Year], VIN, Mileage, MSRP, SalePrice, [Description], PhotoPath, isFeatured, IsSold)
-	VALUES (@MakeId, @ModelId, @InteriorId, @ColorId, @TypeID, @BodyId, @TransmissionId, @Year, @VIN, @Mileage, @MSRP, @SalePrice, @Description, @PhotoPath, @isFeatured, @IsSold)
+	INSERT INTO Vehicle(MakeId, ModelId, InteriorId, ColorId, TypeID, BodyId, TransmissionId, [Year], VIN, Mileage, MSRP, SalePrice, [Description], PhotoPath, isFeatured, IsSold, isDeleted)
+	VALUES (@MakeId, @ModelId, @InteriorId, @ColorId, @TypeID, @BodyId, @TransmissionId, @Year, @VIN, @Mileage, @MSRP, @SalePrice, @Description, @PhotoPath, @isFeatured, @IsSold, @isDeleted)
 
 	SET @VehicleId = SCOPE_IDENTITY()
 GO
@@ -275,7 +300,8 @@ CREATE PROCEDURE UpdateVehicle (
 	@Description VARCHAR(300),
 	@PhotoPath NVARCHAR(100),
 	@isSold BIT,
-	@isFeatured BIT
+	@isFeatured BIT,
+	@isDeleted BIT
 )
 AS
 	UPDATE Vehicle
@@ -294,7 +320,8 @@ AS
 		[Description] = @Description,
 		PhotoPath = @PhotoPath,
 		isSold = @isSold,
-		isFeatured = @isFeatured
+		isFeatured = @isFeatured,
+		isDeleted = @isDeleted
 
 	WHERE VehicleId = @VehicleId
 GO
@@ -305,13 +332,15 @@ AS
 	FROM Vehicle v
 	INNER JOIN Make m ON m.MakeId = v.MakeId
 	INNER JOIN Model mo	ON mo.ModelId = v.ModelId
-	Where isFeatured = 1
+	Where isFeatured = 1  AND v.isDeleted = 0
 GO
 
 CREATE PROCEDURE GetMakeItems
 AS
-	SELECT  MakeId, UserId, MakeName, DateAdded
+	SELECT  m.MakeId, u.UserName AS UserId, m.MakeName, m.DateAdded
 	FROM Make m
+	INNER JOIN AspNetUsers u ON u.UserName = m.UserId
+
 GO
 
 CREATE PROCEDURE AddMakeItem(
@@ -329,7 +358,7 @@ GO
 
 CREATE PROCEDURE GetModelItems
 AS
-	SELECT  m.MakeId, m.UserId, MakeName, mo.ModelName, mo.DateAdded
+	SELECT  m.MakeId, m.UserId, MakeName, mo.ModelName, mo.DateAdded, mo.MakeId, mo.ModelId
 	FROM Make m
 	INNER JOIN Model mo ON mo.MakeId = m.MakeId
 GO
@@ -376,56 +405,69 @@ GO
 
 CREATE PROCEDURE GetAllUsers
 AS
-	SELECT  Id, LastName, FirstName, Email, RoleId, [Password] FROM AspNetUsers
+	SELECT  u.Id AS UserId, LastName, FirstName, UserName, r.Name AS RoleId, PasswordHash FROM AspNetUsers u
+	INNER JOIN AspNetUserRoles ur ON ur.UserId = u.Id
+	INNER JOIN AspNetRoles r ON r.Id = ur.RoleId
 GO
 
 CREATE PROCEDURE AddUser(
-	@Id NVARCHAR(128),
+	@UserId NVARCHAR(128),
 	@RoleId VARCHAR(10),
-	@Password VARCHAR(30),
+	@PasswordHash VARCHAR(30),
 	@LockOutEnabled BIT,
 	@Username VARCHAR(40),
 	@FirstName VARCHAR(20),
 	@LastName VARCHAR(20),
-	@Email VARCHAR(30)
+	@Email VARCHAR(30),
+	@PhoneNumberConfirmed VARCHAR(10),
+	@EmailConfirmed BIT,
+	@TwoFactorEnabled BIT,
+	@AccessFailedCount BIT
 )
 AS
-	INSERT INTO AspNetUsers (Id, RoleId, [Password], LockoutEnabled, Username, FirstName, LastName, Email)
-	VALUES (@Id, @RoleId, @Password, @LockOutEnabled, @Username, @FirstName, @LastName, @Email)
+	INSERT INTO AspNetUsers (Id, RoleId, PasswordHash, LockoutEnabled, Username, FirstName, LastName, Email, PhoneNumberConfirmed, EmailConfirmed, TwoFactorEnabled, AccessFailedCount)
+	VALUES (@UserId, @RoleId, @PasswordHash, @LockOutEnabled, @Username, @FirstName, @LastName, @Email, @PhoneNumberConfirmed, @EmailConfirmed, @TwoFactorEnabled, @AccessFailedCount)
 GO
 
 CREATE PROCEDURE EditUser(
-	@Id NVARCHAR(128),
+	@UserId NVARCHAR(128),
 	@RoleId VARCHAR(10),
-	@password VARCHAR(30),
+	@PasswordHash VARCHAR(30),
 	@LockOutEnabled BIT,
 	@Username VARCHAR(40),
 	@FirstName VARCHAR(20),
 	@LastName VARCHAR(20),
-	@Email VARCHAR(30)
-
+	@Email VARCHAR(30),
+	@PhoneNumberConfirmed VARCHAR(10),
+	@EmailConfirmed BIT,
+	@TwoFactorEnabled BIT,
+	@AccessFailedCount BIT
 )
 AS
 	UPDATE AspNetUsers 
 	 SET RoleId = @RoleId,
-	 [Password] = @Password,
+	 PasswordHash = @PasswordHash,
 	 LockoutEnabled = @LockOutEnabled,
 	 UserName = @UserName,
 	 FirstName = @FirstName,
 	 LastName = @LastName,
-	 Email = @Email
-	 WHERE Id = @Id
+	 Email = @Email,
+	 PhoneNumberConfirmed = @PhoneNumberConfirmed,
+	EmailConfirmed = @EmailConfirmed,
+	TwoFactorEnabled = @TwoFactorEnabled,
+	AccessFailedCount = @AccessFailedCount
+	 WHERE Id = @UserId
 GO
 
 CREATE PROCEDURE EditPassword(
-	@Id NVARCHAR(128),
-	@Password VARCHAR(30)
+	@UserId NVARCHAR(128),
+	@PasswordHash VARCHAR(30)
 )
 AS
 	UPDATE AspNetUsers 
 	 SET
-	 [Password] = @Password
-	 WHERE Id = @Id
+	 PasswordHash = @PasswordHash
+	 WHERE Id = @UserId
 GO
 
 CREATE PROCEDURE GetAllSpecials
@@ -453,3 +495,14 @@ AS
 	DELETE FROM Special
 	Where @id = SpecialId
 GO
+
+CREATE PROCEDURE GetInventoryReport
+AS
+	SELECT  [Year], m.MakeName, mo.ModelName, Count(*) AS Count, SUM(v.MSRP) AS StockValue
+ 	FROM Vehicle v
+	INNER JOIN Make m ON m.MakeId = v.MakeId
+	INNER JOIN Model mo ON mo.ModelId = v.ModelId
+	group by [Year], m.MakeName, mo.ModelName
+	order by [Year], m.MakeName, mo.ModelName desc
+GO
+

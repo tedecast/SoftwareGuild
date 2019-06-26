@@ -37,7 +37,7 @@ namespace CarDealership.Tests.Integration_Tests
 			reset.ResetData();
 
 			SalesSearchItem search = new SalesSearchItem();
-			search.User = "Test";
+			search.UserSelect = "Test";
 			var repo = SalesRepositoryFactory.GetRepository();
 			var searchResults = repo.GetSalesBySearch(search);
 
@@ -87,7 +87,7 @@ namespace CarDealership.Tests.Integration_Tests
 			reset.ResetData();
 
 			SalesSearchItem search = new SalesSearchItem();
-			search.User = "Test";
+			search.UserSelect = "Test";
 			search.FromDate = DateTime.Parse("1/2/2018");
 			var repo = SalesRepositoryFactory.GetRepository();
 			var searchResults = repo.GetSalesBySearch(search);
@@ -104,7 +104,7 @@ namespace CarDealership.Tests.Integration_Tests
 			reset.ResetData();
 
 			SalesSearchItem search = new SalesSearchItem();
-			search.User = "Test";
+			search.UserSelect = "Test";
 			search.ToDate = DateTime.Parse("1/2/2018");
 			var repo = SalesRepositoryFactory.GetRepository();
 			var searchResults = repo.GetSalesBySearch(search);
@@ -136,7 +136,7 @@ namespace CarDealership.Tests.Integration_Tests
 			reset.ResetData();
 
 			SalesSearchItem search = new SalesSearchItem();
-			search.User = "test";
+			search.UserSelect = "test";
 			search.ToDate = DateTime.Parse("1/2/2019");
 			search.FromDate = DateTime.Parse("1/2/2018");
 			var repo = SalesRepositoryFactory.GetRepository();

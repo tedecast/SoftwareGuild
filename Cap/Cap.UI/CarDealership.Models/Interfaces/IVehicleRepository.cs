@@ -12,7 +12,6 @@ namespace CarDealership.Data.Interfaces
 	{
 		List<VehicleItem> GetAll();
 		VehicleItem GetVehicleItemById(int id);
-		List<VehicleItem> GetVehicleToItemBySelectforSale(List<VehicleItem> v );
 		Vehicle GetVehicleById(int id);
 		List<FeaturedVehicleItem> GetFeatured();
 		List<VehicleItem> GetVehicleBySearch(SearchItem search);
@@ -23,6 +22,7 @@ namespace CarDealership.Data.Interfaces
 		void AddMake(Make make);
 		List<ModelItem> GetModelItems();
 		void AddModel(Model model);
+		List<InventoryReportItem> InventoryReport();
 
 
 	}

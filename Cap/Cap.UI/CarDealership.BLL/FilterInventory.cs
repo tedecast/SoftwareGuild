@@ -27,5 +27,13 @@ namespace CarDealership.BLL
 
 			return filteredInventory;
 		}
+
+		public static List<VehicleItem> SalesInventory(List<VehicleItem> inventory)
+		{
+
+			List<VehicleItem> filteredInventory = inventory.Where(x => x.IsSold == false).ToList();
+
+			return filteredInventory;
+		}
 	}
 }

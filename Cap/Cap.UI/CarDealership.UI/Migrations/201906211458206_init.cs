@@ -36,9 +36,12 @@ namespace CarDealership.UI.Migrations
                     {
                         Id = c.String(nullable: false, maxLength: 128),
                         RoleId = c.String(),
+                        FirstName = c.String(),
+                        LastName = c.String(),
+                        FirstLastName = c.String(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
-                        Password = c.String(),
+                        PasswordHash = c.String(),
                         SecurityStamp = c.String(),
                         PhoneNumber = c.String(),
                         PhoneNumberConfirmed = c.Boolean(nullable: false),

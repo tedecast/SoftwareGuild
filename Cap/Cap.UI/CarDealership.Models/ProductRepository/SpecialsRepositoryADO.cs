@@ -49,7 +49,7 @@ namespace CarDealership.Data.ADO
 				cmd.CommandType = CommandType.StoredProcedure;
 				cmd.CommandText = "DeleteSpecial";
 
-				cmd.Parameters.AddWithValue("@SpecialId", id);
+				cmd.Parameters.AddWithValue("@id", id);
 
 				conn.Open();
 				cmd.ExecuteNonQuery();

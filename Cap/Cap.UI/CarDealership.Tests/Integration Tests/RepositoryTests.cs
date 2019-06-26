@@ -86,7 +86,7 @@ namespace CarDealership.Tests.Integration_Tests
 			Assert.AreEqual(0, vehicle.Mileage);
 			Assert.AreEqual(25000.00, vehicle.MSRP);
 			Assert.AreEqual(23000.00, vehicle.SalePrice);
-			Assert.AreEqual("~/images/inventory-1", vehicle.PhotoPath);
+			Assert.AreEqual("inventory-1.jpg", vehicle.PhotoPath);
 			Assert.AreEqual(true, vehicle.IsFeatured);
 			Assert.AreEqual(false, vehicle.IsSold);
 		}
@@ -212,7 +212,7 @@ namespace CarDealership.Tests.Integration_Tests
 			Model item = new Model();
 			item.MakeId = 2;
 			item.ModelName = "Focus";
-			item.Id = "00000000-0000-0000-0000-000000000000";
+			item.UserId = "00000000-0000-0000-0000-000000000000";
 			item.DateAdded = DateTime.Parse("5/5/2019");
 
 			var repo = VehicleRepositoryFactory.GetRepository();
@@ -233,7 +233,7 @@ namespace CarDealership.Tests.Integration_Tests
 
 			Make item = new Make();
 			item.MakeName = "Lexus";
-			item.Id = "00000000-0000-0000-0000-000000000000";
+			item.UserId = "00000000-0000-0000-0000-000000000000";
 			item.DateAdded = DateTime.Parse("1/1/2015");
 
 			var repo = VehicleRepositoryFactory.GetRepository();
@@ -251,7 +251,7 @@ namespace CarDealership.Tests.Integration_Tests
 			reset.ResetData();
 
 			Sale sale = new Sale();
-			sale.Id = "00000000-0000-0000-0000-000000000000";
+			sale.UserId = "00000000-0000-0000-0000-000000000000";
 			sale.PurchaseTypeId = 1;
 			sale.VehicleId = 1;
 			sale.PurchasePrice = 230000;
@@ -272,6 +272,15 @@ namespace CarDealership.Tests.Integration_Tests
 
 
 			Assert.AreEqual(true, sold.IsSold);
+		}
+
+		[Test]
+		public void CanGetReport()
+		{
+
+			var sRepo = VehicleRepositoryFactory.GetRepository().InventoryReport();
+
+			Assert.AreEqual("Kia", sRepo[0].MakeName);
 		}
 	}
 }

@@ -1,0 +1,94 @@
+﻿@model CarDealership.UI.Models.UserViewModel
+
+@{
+	ViewBag.Title = "UpdateUser";
+}
+
+<h2>Edit User</h2>
+
+@using (Html.BeginForm("UpdateUser", "Admin", FormMethod.Post, new { id = "add-user-form", @class = "form-group", enctype = "multipart/form-data" }))
+{
+	@Html.ValidationSummary()
+	@Html.HiddenFor(m => m.User.Id);
+
+	<div class="row">
+		<div class=" col-4 form-group">
+			<label>First Name</label>
+			@Html.TextBoxFor(m => m.User.FirstName, new { @class = "form-control", required="required"})
+		</div>
+		<div class="col-4 form-group">
+			<label>Last Name</label>
+			@Html.TextBoxFor(m => m.User.LastName, new { @class = "form-control", required = "required" })
+		</div>
+		<div class="col-4 form-group">
+
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-4 form-group">
+			<label>Email</label>
+			@Html.TextBoxFor(m => m.User.UserName, new { @class = "form-control", required = "required" })
+		</div>
+		<div class="col-4 form-group">
+			<label>Role</label>
+			@Html.DropDownListFor(m => m.User.RoleId, Model.Roles, new { @class = "form-control" })
+			@Html.Hidden("Email", Model.User.UserName)
+
+		</div>
+		<div class="col-4 form-group">
+
+		</div>
+	</div>
+
+	<div class="row">
+		<div class=" col-4 form-group">
+			<label>Password</label>
+			@Html.TextBoxFor(m => m.User.PasswordHash, new { id = "password", @class = "form-control", type="password"})
+		</div>
+		<div class="col-4 form-group">
+			<label>Confirm Password</label>
+			@Html.TextBoxFor(m => m.User.PasswordHash, new { id = "cfmPassword", @class = "form-control", type = "password", required = "required" })
+		</div>
+		<div class="col-4 form-group">
+
+		</div>
+	</div>
+	<div class="row">
+		<div class=" col-12 form-group">
+			<button type="submit" class="btn btn-dark">Save</button>
+		</div>
+	</div>
+}
+
+@section Scripts{
+	<script>
+		$("#add-user-form").validate({
+			rules: {
+				password: {
+					required: true,
+
+
+				},
+
+				cfmPassword: {
+					equalTo: "#password",
+					minlength: 6,
+					maxlength: 10
+				}
+
+
+			},
+			messages: {
+				password: {
+					required: "the password is required"
+
+				}
+			}
+
+		});
+
+	</script>
+
+
+}

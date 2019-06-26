@@ -23,7 +23,7 @@ namespace CarDealership.Data.ProductRepository
 				var parameters = new DynamicParameters();
 				parameters.Add("@SaleId",
 				dbType: DbType.Int32, direction: ParameterDirection.Output);
-				parameters.Add("@UserId", sale.Id);
+				parameters.Add("@UserId", sale.UserId);
 				parameters.Add("@PurchaseTypeId", sale.PurchaseTypeId);
 				parameters.Add("@VehicleId", sale.VehicleId);
 				parameters.Add("@PurchasePrice", sale.PurchasePrice);
@@ -67,10 +67,10 @@ namespace CarDealership.Data.ProductRepository
 					query += "AND DateSold <= @toDate ";
 					parameters.Add("@toDate", search.ToDate);
 				}
-				if (!string.IsNullOrEmpty(search.User))
+				if (!string.IsNullOrEmpty(search.UserSelect))
 				{
-					query += "AND (u.FirstName LIKE @User OR u.LastName LIKE @User) ";
-					parameters.Add("@User", search.User + "%");
+					query += "AND (u.Id LIKE @User) ";
+					parameters.Add("@User", search.UserSelect);
 				}
 
 				query += " GROUP BY u.FirstName, u.LastName ";

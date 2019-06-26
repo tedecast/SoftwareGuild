@@ -19,10 +19,17 @@
 					<li class="nav-item">@Html.ActionLink("Used Inventory", "Used", "Inventory", null, new { @class = "nav-link" })</li>
 					<li class="nav-item">@Html.ActionLink("Specials", "Specials", "Home", null, new { @class = "nav-link" })</li>
 					<li class="nav-item">@Html.ActionLink("Contact", "Index", "ContactUs", null, new { @class = "nav-link" })</li>
-				</ul>
+					@if (User.Identity.IsAuthenticated && User.IsInRole("sales"))
+					{
+					<li class="nav-item">@Html.ActionLink("Sales", "Index", "Sales", null, new { @class = "nav-link" })</li>
+					}
+					@if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+					{
+					<li class="nav-item">@Html.ActionLink("Sales", "Index", "Sales", null, new { @class = "nav-link" })</li>
+					<li class="nav-item">@Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link" })</li>
+					}
+					@Html.Partial("_LoginPartial")
 
-				<ul class="nav navbar-nav navbar-right mr-auto">
-					<li class="nav-item"><a href="/Account/Login" id="loginLink" class="nav-link">Log in</a></li>
 				</ul>
 
 			</div>

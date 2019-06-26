@@ -24,13 +24,21 @@ namespace CarDealership.UI.Models
 			New = new bool();
 		}
 
-		public void Populate(bool New)
+		public void Populate(bool New, bool sales, bool admin)
 		{
 			var repo = VehicleRepositoryFactory.GetRepository();
-			if(New)
+			if (sales)
+			{
+				Vehicles = FilterInventory.SalesInventory(repo.GetAll());
+			}
+			if(New && !sales)
 				Vehicles = FilterInventory.NewInventory(repo.GetAll());
-			else
+			if(!New && !sales)
 				Vehicles = FilterInventory.UsedInventory(repo.GetAll());
+			if(admin)
+			{
+				Vehicles = repo.GetAll();
+			}
 
 			for (int i = 2000; i <= DateTime.Now.Year; i++)
 			{

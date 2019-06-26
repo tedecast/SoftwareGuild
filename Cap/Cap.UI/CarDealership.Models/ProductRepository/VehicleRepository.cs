@@ -37,10 +37,18 @@ namespace CarDealership.Data.ProductRepository
 				parameters.Add("@MSRP", vehicle.MSRP);
 				parameters.Add("@SalePrice", vehicle.SalePrice);
 				parameters.Add("@Description", vehicle.Description);
-				parameters.Add("@PhotoPath", vehicle.PhotoPath);
 				parameters.Add("@isSold", vehicle.IsSold);
 				parameters.Add("@isFeatured", vehicle.IsFeatured);
 
+
+				if (string.IsNullOrEmpty(vehicle.PhotoPath))
+				{
+					parameters.Add("@PhotoPath", " ");
+				}
+				else
+				{
+					parameters.Add("@PhotoPath", vehicle.PhotoPath);
+				}
 
 				cn.Execute("AddVehicle", parameters,
 							commandType: CommandType.StoredProcedure);
@@ -85,6 +93,7 @@ namespace CarDealership.Data.ProductRepository
 				parameters.Add("@PhotoPath", vehicle.PhotoPath);
 				parameters.Add("@isSold", vehicle.IsSold);
 				parameters.Add("@isFeatured", vehicle.IsFeatured);
+				parameters.Add("@isDeleted", vehicle.IsDeleted);
 
 				cn.Execute("UpdateVehicle", parameters, commandType: CommandType.StoredProcedure);
 
@@ -137,7 +146,7 @@ namespace CarDealership.Data.ProductRepository
 				parameters.Add("@MakeId",
 				dbType: DbType.Int32, direction: ParameterDirection.Output);
 				parameters.Add("@MakeName", item.MakeName);
-				parameters.Add("@UserId", item.Id);
+				parameters.Add("@UserId", item.UserId);
 				parameters.Add("@DateAdded", item.DateAdded);
 
 				cn.Execute("AddMakeItem", parameters,
@@ -170,7 +179,7 @@ namespace CarDealership.Data.ProductRepository
 				dbType: DbType.Int32, direction: ParameterDirection.Output);
 				parameters.Add("@MakeId", item.MakeId);
 				parameters.Add("@ModelName", item.ModelName);
-				parameters.Add("@UserId", item.Id);
+				parameters.Add("@UserId", item.UserId);
 				parameters.Add("@DateAdded", item.DateAdded);
 
 				cn.Execute("AddModelItem", parameters,
@@ -188,7 +197,7 @@ namespace CarDealership.Data.ProductRepository
 
 				var parameters = new DynamicParameters();
 				parameters.Add("@VehicleId", id);
-				return cn.Query<VehicleItem>("GetVehicleById", parameters,
+				return cn.Query<VehicleItem>("GetVehicleItemById", parameters,
 							commandType: CommandType.StoredProcedure).FirstOrDefault();
 			}
 		}
@@ -210,7 +219,7 @@ namespace CarDealership.Data.ProductRepository
 				"INNER JOIN[Type] t ON t.TypeId = v.TypeID " +
 				"INNER JOIN Body b ON b.BodyId = v.BodyId " +
 				"INNER JOIN Transmission tr ON tr.TransmissionId = v.TransmissionId " +
-				"WHERE 1 = 1 AND isSold = 0";
+				"WHERE 1 = 1 AND isSold = 0 AND isDeleted = 0";
 
 				if (item.MinPrice.HasValue)
 				{
@@ -248,12 +257,26 @@ namespace CarDealership.Data.ProductRepository
 
 		public Vehicle GetVehicleById(int id)
 		{
-			throw new NotImplementedException();
+			using (var cn = new SqlConnection())
+			{
+				cn.ConnectionString = Settings.GetConnectionString();
+
+				var parameters = new DynamicParameters();
+				parameters.Add("@VehicleId", id);
+				return cn.Query<Vehicle>("GetVehicleById", parameters,
+							commandType: CommandType.StoredProcedure).FirstOrDefault();
+			}
 		}
 
-		public List<VehicleItem> GetVehicleToItemBySelectforSale(List<VehicleItem> v)
+		public List<InventoryReportItem> InventoryReport()
 		{
-			throw new NotImplementedException();
+			using (var cn = new SqlConnection())
+			{
+				cn.ConnectionString = Settings.GetConnectionString();
+
+				return cn.Query<InventoryReportItem>("GetInventoryReport",
+							commandType: CommandType.StoredProcedure).ToList();
+			}
 		}
 	}
 }

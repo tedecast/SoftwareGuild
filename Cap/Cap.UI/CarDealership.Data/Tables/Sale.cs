@@ -9,7 +9,7 @@ namespace CarDealership.Models.Tables
 	public class Sale
 	{
 		public int SaleId { get; set; }
-		public string Id { get; set; }
+		public string UserId { get; set; }
 		public int PurchaseTypeId { get; set; }
 		public int VehicleId {get;set;}
 		public decimal PurchasePrice { get; set; }

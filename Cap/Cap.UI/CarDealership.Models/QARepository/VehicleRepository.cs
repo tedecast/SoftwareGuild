@@ -16,14 +16,14 @@ namespace CarDealership.Data.QARepository
 			new MakeItem
 			{
 				MakeId = 1,
-				Id = "00000000-0000-0000-0000-000000000000",
+				UserId = "00000000-0000-0000-0000-000000000000",
 				MakeName = "Subaru",
 				DateAdded = DateTime.Parse("1/1/2011")
 			},
 			new MakeItem
 			{
 				MakeId = 2,
-				Id = "00000000-0000-0000-0000-000000000000",
+				UserId = "00000000-0000-0000-0000-000000000000",
 				MakeName = "Ford",
 				DateAdded = DateTime.Parse("1/1/2012")
 
@@ -31,7 +31,7 @@ namespace CarDealership.Data.QARepository
 			new MakeItem
 			{
 				MakeId = 3,
-				Id = "00000000-0000-0000-0000-000000000000",
+				UserId = "00000000-0000-0000-0000-000000000000",
 				MakeName = "Kia",
 				DateAdded = DateTime.Parse("1/1/2013")
 			},
@@ -44,7 +44,7 @@ namespace CarDealership.Data.QARepository
 			{
 				ModelId = 1,
 				MakeId = 1,
-				Id = "00000000-0000-0000-0000-000000000000",
+				UserId = "00000000-0000-0000-0000-000000000000",
 				ModelName = "Outback",
 				DateAdded = DateTime.Parse("1/1/2019")
 			},
@@ -52,7 +52,7 @@ namespace CarDealership.Data.QARepository
 			{
 				ModelId = 2,
 				MakeId = 2,
-				Id = "00000000-0000-0000-0000-000000000000",
+				UserId = "00000000-0000-0000-0000-000000000000",
 				ModelName = "F-150",
 				DateAdded = DateTime.Parse("1/1/2018")
 			},
@@ -60,7 +60,7 @@ namespace CarDealership.Data.QARepository
 			{
 				ModelId = 3,
 				MakeId = 3,
-				Id = "00000000-0000-0000-0000-000000000000",
+				UserId = "00000000-0000-0000-0000-000000000000",
 				ModelName = "Sedona",
 				DateAdded = DateTime.Parse("1/1/2017")
 			},
@@ -68,7 +68,7 @@ namespace CarDealership.Data.QARepository
 			{
 				ModelId = 4,
 				MakeId = 1,
-				Id = "00000000-0000-0000-0000-000000000000",
+				UserId = "00000000-0000-0000-0000-000000000000",
 				ModelName = "Forester",
 				DateAdded = DateTime.Parse("1/1/2017")
 			},
@@ -352,7 +352,8 @@ namespace CarDealership.Data.QARepository
 								   MakeName = make.MakeName,
 								   ModelName = mo.ModelName,
 								   DateAdded = mo.DateAdded,
-								   Id = make.Id
+								   UserId = make.UserId,
+								   MakeId = mo.MakeId
 							   };
 
 			return itemVehicles.ToList();
@@ -363,7 +364,7 @@ namespace CarDealership.Data.QARepository
 			MakeItem item = new MakeItem()
 			{
 				MakeId = make.MakeId,
-				Id = make.Id,
+				UserId = make.UserId,
 				MakeName = make.MakeName,
 				DateAdded = make.DateAdded
 			};
@@ -498,17 +499,37 @@ namespace CarDealership.Data.QARepository
 			return filteredVehicles.ToList();
 		}
 
-		public List<VehicleItem> GetVehicleToItemBySelectforSale(List<VehicleItem> v)
+		public List<InventoryReportItem> InventoryReport()
 		{
-			throw new NotImplementedException();
+			List<VehicleItem> vehicles = GetAllVehiclesToItem();
+
+			var groupReport = from vehicle in _vehicles
+							  join m in _makes on vehicle.MakeId equals m.MakeId
+							  join mo in _models on vehicle.ModelId equals mo.ModelId
+							  join t in _types on vehicle.TypeId equals t.TypeId
+							  where vehicle.IsSold = false
+							  group vehicle by new
+							  {
+								  vehicle.Year,
+								  m.MakeName,
+								  mo.ModelName,
+								  mo.ModelId,
+								  t.TypeName
+							  };
+
+			var finalReport = from g in groupReport
+							  select new InventoryReportItem
+							  {
+								  Year = g.Key.Year,
+								  MakeName = g.Key.MakeName,
+								  ModelName = g.Key.ModelName,
+								  Count = g.Count(),
+								  StockValue = _vehicles.Where(x => x.ModelId == g.Key.ModelId).Sum(x => x.MSRP),
+								  TypeName = g.Key.TypeName
+							  };
+
+			return finalReport.ToList();
 		}
 	}
 }
 
-/*var filteredVehicles = from v in vehicles
-					   where (search.MinYear == null || v.Year >= search.MinYear)
-					   && (search.MaxYear == null || v.Year <= search.MaxYear)
-					   && (search.MinPrice == null || v.SalePrice >= search.MinPrice)
-					   && (search.MaxPrice == null || v.SalePrice <= search.MaxPrice)
-					   && (string.IsNullOrEmpty(search.SearchTerm) || regEx.IsMatch(v.MakeName) || regEx.IsMatch(v.ModelName))
-					   select (v);*/

@@ -1,0 +1,96 @@
+﻿@model CarDealership.UI.Models.ModelViewModel
+
+@{
+	ViewBag.Title = "Models";
+}
+
+<div class="row">
+	<div class="col-md-12">
+		<h2>Models</h2>
+
+	</div>
+</div>
+<div class="row make-border make-header">
+	<div class="col-12">
+		@using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal", id = "add-model-form" }))
+		{
+
+			<div class="row make-header">
+
+				<div class="col-md-2 model-add-bar">
+					<p>New Model</p>
+				</div>
+				<div class="col-md-3 model-add-bar">
+					@Html.TextBoxFor(m => m.VehicleModel.ModelName, new { id = "ModelName", required = "required" })
+				</div>
+				<div class="col-md-2 model-add-bar">
+					<p>Make</p>
+				</div>
+				<div class="col-md-2 model-add-bar">
+					@Html.DropDownListFor(m => m.VehicleModel.MakeId, Model.Makes, new { id = "make-dropdown" })
+				</div>
+				<div class="col-md-2 model-add-bar">
+					<button type="submit" id="save-button" class="btn btn-dark">Save</button>
+				</div>
+			</div>
+		}
+
+	</div>
+
+</div>
+<div class="row inventory-results-header">
+	<br />
+	<div class="col-md-12">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Make</th>
+					<th>Model</th>
+					<th>Date Added</th>
+					<th>User</th>
+				</tr>
+			</thead>
+			<tbody id="contentRows"></tbody>
+		</table>
+	</div>
+</div>
+
+
+@section Scripts
+{
+	<script src="~/Scripts/DateFormat.js"></script>
+
+	<script>
+		$(document).ready(function () {
+			$('#ModelName').val('');
+			getModels();
+		});
+
+		function getModels() {
+
+			$.ajax({
+				type: 'GET',
+				url: 'http://localhost:60758/admin/getmodels/',
+				success: function (results) {
+					$('#contentRows').empty();
+
+					$.each(results, function (index, model) {
+						var html = '<tr>' +
+							'<td>' + model.MakeName + '</td>' +
+							'<td>' + model.ModelName + '</td>' +
+							'<td>' + dateFormat(model.DateAdded, 'mm/dd/yyyy').toString() + '</td>' +
+							'<td>' + model.UserId + '</td>' +
+							'</tr>';
+						$('#contentRows').append(html.toString());
+					});
+
+				},
+				error: function () {
+					alert('Error performing search, try again later!');
+				}
+			});
+		}
+
+	</script>
+}
+

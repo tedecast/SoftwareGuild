@@ -85,7 +85,8 @@ CREATE TABLE Vehicle (
 	[Description] VARCHAR(300) NOT NULL,
 	PhotoPath NVARCHAR(100) NULL,
 	IsSold BIT NOT NULL,
-	isFeatured BIT NOT NULL
+	isFeatured BIT NOT NULL,
+	isDeleted BIT NOT NULL
 )
 
 CREATE TABLE PurchaseType(

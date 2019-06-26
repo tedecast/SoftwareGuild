@@ -8,7 +8,7 @@ namespace CarDealership.Models.Queries
 {
 	public class SalesSearchItem
 	{
-		public string User { get; set; }
+		public string UserSelect { get; set; }
 		public DateTime? FromDate { get; set; }
 		public DateTime? ToDate { get; set; }
 	}

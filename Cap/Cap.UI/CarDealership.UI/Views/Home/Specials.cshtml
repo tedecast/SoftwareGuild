@@ -1,0 +1,35 @@
+﻿@model List<CarDealership.Models.Tables.Special>
+
+@{
+	ViewBag.Title = "Specials";
+}
+
+
+<div class="col-xs-12 inventory-results-header" id="results-header">
+	<h2>Specials</h2>
+</div>
+
+@foreach (var special in Model)
+{
+	<br />
+
+		<div class="row sales-border">
+			<div class="col-md-3" id="contentRow">
+				<img class="center-block" src="/Images/special-dollar.png" />
+			</div>
+			<div class="col-md-9 searchResultsCell" id="contentRow">
+				<div class="row">
+					<div class="col-xs-12">
+						@special.SpecialTitle
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						@special.SpecialDescription
+					</div>
+				</div>
+			</div>
+
+		</div>
+}
+

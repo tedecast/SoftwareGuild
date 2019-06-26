@@ -25,5 +25,6 @@ namespace CarDealership.Models.Queries
 		public string PhotoPath { get; set; }
 		public bool IsFeatured { get; set; }
 		public bool IsSold { get; set; }
+		public bool IsDeleted { get; set; }
 	}
 }

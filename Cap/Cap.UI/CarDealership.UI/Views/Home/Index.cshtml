@@ -38,7 +38,7 @@
 	@foreach (var view in Model.Featured)
 	{
 		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-			<a href="@Url.Action("New", "Inventory", new { id = view.VehicleId })">
+			<a href="@Url.Action("Details", "Inventory", new { id = view.VehicleId })">
 				<div class="square">
 					<div class="content">
 						<div class="table">

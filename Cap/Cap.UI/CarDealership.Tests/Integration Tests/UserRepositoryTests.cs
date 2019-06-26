@@ -27,6 +27,7 @@ namespace CarDealership.Tests.Integration_Tests
 		[Test]
 		public void CanAddUsers()
 		{
+
 			var reset = new DataResetRepository();
 			reset.ResetData();
 
@@ -36,15 +37,20 @@ namespace CarDealership.Tests.Integration_Tests
 			item.Email = "test@test.com";
 			item.LockoutEnabled = false;
 			item.RoleId = "sales";
-			item.Password = "password";
-			item.Id = "d10dee9d-5dc7-44e3-b550-10cb35982cf5";
+			item.PasswordHash = "password";
+			item.UserId = "d10dee9d-5dc7-44e3-b550-10cb35982cf5";
+			item.EmailConfirmed = true;
+			item.PhoneNumberConfirmed = false;
+			item.TwoFactorEnabled = false;
+			item.LockoutEnabled = false;
+			item.AccessFailedCount = false;
 
 			var repo = UsersRepositoryFactory.GetRepository();
 			repo.AddUser(item);
 
 			var users = repo.GetAll();
 			Assert.AreEqual(2, users.Count);
-			Assert.AreEqual("d10dee9d-5dc7-44e3-b550-10cb35982cf5", users[1].Id);
+			Assert.AreEqual("d10dee9d-5dc7-44e3-b550-10cb35982cf5", users[1].UserId);
 
 		}
 
@@ -60,14 +66,19 @@ namespace CarDealership.Tests.Integration_Tests
 			item.Email = "test@test.com";
 			item.LockoutEnabled = false;
 			item.RoleId = "sales";
-			item.Password = "password";
-			item.Id = "d10dee9d-5dc7-44e3-b550-10cb35982cf5";
+			item.PasswordHash = "password";
+			item.UserId = "d10dee9d-5dc7-44e3-b550-10cb35982cf5";
+			item.EmailConfirmed = true;
+			item.PhoneNumberConfirmed = false;
+			item.TwoFactorEnabled = false;
+			item.LockoutEnabled = false;
+			item.AccessFailedCount = false;
 
 			var repo = UsersRepositoryFactory.GetRepository();
 			repo.AddUser(item);
 
 			item.RoleId = "admin";
-			item.Id = "d10dee9d-5dc7-44e3-b550-10cb35982cf5";
+			item.UserId = "d10dee9d-5dc7-44e3-b550-10cb35982cf5";
 
 			repo.EditUser(item);
 
@@ -88,20 +99,25 @@ namespace CarDealership.Tests.Integration_Tests
 			item.Email = "test@test.com";
 			item.LockoutEnabled = false;
 			item.RoleId = "sales";
-			item.Password = "password";
-			item.Id = "d10dee9d-5dc7-44e3-b550-10cb35982cf5";
+			item.PasswordHash = "password";
+			item.UserId = "d10dee9d-5dc7-44e3-b550-10cb35982cf5";
+			item.EmailConfirmed = true;
+			item.PhoneNumberConfirmed = false;
+			item.TwoFactorEnabled = false;
+			item.LockoutEnabled = false;
+			item.AccessFailedCount = false;
 
 			var repo = UsersRepositoryFactory.GetRepository();
 			repo.AddUser(item);
 
-			item.Password = "password123";
-			item.Id = "d10dee9d-5dc7-44e3-b550-10cb35982cf5";
+			item.PasswordHash = "password123";
+			item.UserId = "d10dee9d-5dc7-44e3-b550-10cb35982cf5";
 
 			repo.EditPassword(item);
 
 			var users = repo.GetAll();
 			Assert.AreEqual(2, users.Count);
-			Assert.AreEqual("password123", users[1].Password);
+			Assert.AreEqual("password123", users[1].PasswordHash);
 		}
 	}
 }

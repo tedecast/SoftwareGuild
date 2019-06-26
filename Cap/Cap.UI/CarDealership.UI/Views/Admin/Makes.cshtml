@@ -1,0 +1,101 @@
+﻿@model CarDealership.Models.Tables.Make
+
+@{
+	ViewBag.Title = "Makes";
+}
+<div class="row">
+	<div class="col-12">
+		<h2>Makes</h2>
+
+	</div>
+</div>
+<div class="row make-border make-header">
+	<div class="col-12">
+
+		@using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal", id = "add-make-form" }))
+		{
+
+			<div class="row make-header">
+				<div class="col-md-2 col-xs-12">
+					<p>New Make</p>
+
+				</div>
+				<div class="col-md-3 col-xs-12">
+					@Html.TextBoxFor(m => m.MakeName, new { id ="MakeName", required="required"})	
+				</div>
+				<div class="col-md-7 col-xs-12">
+					<button type="submit" id="save-button" class="btn btn-dark">Save</button>
+				</div>
+			</div>
+		}
+	</div>
+
+</div>
+<div class="row inventory-results-header">
+	<br/>
+	<div class="col-12" >
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Make</th>
+					<th>Date Added</th>
+					<th>User</th>
+
+				</tr>
+			</thead>
+			<tbody id="contentRows"></tbody>
+		</table>
+	</div>
+</div>
+
+
+@section Scripts
+{
+	<script src="~/Scripts/DateFormat.js"></script>
+
+	<script>
+		$(document).ready(function () {
+			$('#MakeName').val('');
+			getMakes();
+		});
+		function addMakes() {
+			$.ajax({
+				type: 'POST',
+				url: '@Url.Action("Makes","Admin")',
+				data: JSON.Stringify({
+					MakeName: $('#MakeName').val(),
+				}),
+				success: function (results) {
+
+				},
+				error: function () {
+					alert('Error adding make, try again later!');
+				}
+			});
+		}
+		function getMakes() {
+
+			$.ajax({
+				type: 'GET',
+				url: 'http://localhost:60758/admin/getmakes/',
+				success: function (results) {
+					$('#contentRows').empty();
+
+					$.each(results, function (index, make) {
+						var html = '<tr>' +
+							'<td>' + make.MakeName + '</td>' +
+							'<td>' + dateFormat(make.DateAdded, 'mm/dd/yyyy').toString() + '</td>' +
+							'<td>' + make.UserId + '</td>' +
+							'</tr>';
+						$('#contentRows').append(html.toString());
+					});
+
+				},
+				error: function () {
+					alert('Error performing search, try again later!');
+				}
+			});
+		}
+
+	</script>
+}

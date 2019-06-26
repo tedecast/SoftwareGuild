@@ -16,7 +16,7 @@ namespace CarDealership.UI.Controllers
 		public ActionResult New()
 		{
 			InventoryViewModel model = new InventoryViewModel();
-			model.Populate(true);
+			model.Populate(true, false, false);
 			return View(model);
 		}
 
@@ -24,7 +24,7 @@ namespace CarDealership.UI.Controllers
 		public ActionResult Used()
 		{
 			InventoryViewModel model = new InventoryViewModel();
-			model.Populate(false);
+			model.Populate(false, false, false);
 			return View(model);
 		}
 

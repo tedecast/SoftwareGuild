@@ -32,13 +32,18 @@ namespace CarDealership.Data.ProductRepository
 			{
 				cn.ConnectionString = Settings.GetConnectionString();
 				var parameters = new DynamicParameters();
-				parameters.Add("@Id", user.Id);
+				parameters.Add("@UserId", user.UserId);
 				parameters.Add("@FirstName", user.FirstName);
 				parameters.Add("@LastName", user.LastName);
 				parameters.Add("@LockOutEnabled", user.LockoutEnabled);
 				parameters.Add("@RoleId", user.RoleId);
 				parameters.Add("@UserName", user.FirstName + " " + user.LastName);
-				parameters.Add("@Password", user.Password);
+				parameters.Add("@PasswordHash", user.PasswordHash);
+				parameters.Add("@Email", user.Email);
+				parameters.Add("@PhoneNumberConfirmed", user.PhoneNumberConfirmed);
+				parameters.Add("@EmailConfirmed", user.EmailConfirmed);
+				parameters.Add("@TwoFactorEnabled", user.TwoFactorEnabled);
+				parameters.Add("@AccessFailedCount", user.AccessFailedCount);
 				parameters.Add("@Email", user.Email);
 
 
@@ -54,13 +59,19 @@ namespace CarDealership.Data.ProductRepository
 				cn.ConnectionString = Settings.GetConnectionString();
 
 				var parameters = new DynamicParameters();
-				parameters.Add("@Id", user.Id);
+				parameters.Add("@UserId", user.UserId);
 				parameters.Add("@FirstName", user.FirstName);
 				parameters.Add("@LastName", user.LastName);
 				parameters.Add("@RoleId", user.RoleId);
 				parameters.Add("@UserName", user.FirstName + " " + user.LastName);
-				parameters.Add("@Password", user.Password);
+				parameters.Add("@PasswordHash", user.PasswordHash);
 				parameters.Add("@Email", user.Email);
+				parameters.Add("@PhoneNumberConfirmed", user.PhoneNumberConfirmed);
+				parameters.Add("@EmailConfirmed", user.EmailConfirmed);
+				parameters.Add("@TwoFactorEnabled", user.TwoFactorEnabled);
+				parameters.Add("@AccessFailedCount", user.AccessFailedCount);
+				parameters.Add("@Email", user.Email);
+
 				if (user.RoleId == "disabled")
 				{
 					parameters.Add("@LockOutEnabled", 1);
@@ -78,8 +89,8 @@ namespace CarDealership.Data.ProductRepository
 				cn.ConnectionString = Settings.GetConnectionString();
 
 				var parameters = new DynamicParameters();
-				parameters.Add("@Id", user.Id);
-				parameters.Add("@Password", user.Password);
+				parameters.Add("@UserId", user.UserId);
+				parameters.Add("@PasswordHash", user.PasswordHash);
 
 				cn.Execute("EditPassword", parameters, commandType: CommandType.StoredProcedure);
 			}
