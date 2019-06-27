@@ -44,11 +44,11 @@
 	<div class="row">
 		<div class=" col-4 form-group">
 			<label>Password</label>
-			@Html.TextBoxFor(m => m.User.PasswordHash, new { id = "password", @class = "form-control", type="password"})
+			@Html.TextBoxFor(m => m.User.PasswordHash, new { id = "password", @class = "form-control", type = "password" })
 		</div>
 		<div class="col-4 form-group">
 			<label>Confirm Password</label>
-			@Html.TextBoxFor(m => m.User.PasswordHash, new { id = "cfmPassword", @class = "form-control", type = "password", required = "required" })
+			@Html.TextBoxFor(m => m.User.PasswordHash, new { id = "cfmPassword", @class = "form-control", required = "required", type = "password" })
 		</div>
 		<div class="col-4 form-group">
 

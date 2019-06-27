@@ -19,16 +19,20 @@
 					<li class="nav-item">@Html.ActionLink("Used Inventory", "Used", "Inventory", null, new { @class = "nav-link" })</li>
 					<li class="nav-item">@Html.ActionLink("Specials", "Specials", "Home", null, new { @class = "nav-link" })</li>
 					<li class="nav-item">@Html.ActionLink("Contact", "Index", "ContactUs", null, new { @class = "nav-link" })</li>
-					@if (User.Identity.IsAuthenticated && User.IsInRole("sales"))
+					@if (User.Identity.IsAuthenticated && User.IsInRole("Sales"))
 					{
-					<li class="nav-item">@Html.ActionLink("Sales", "Index", "Sales", null, new { @class = "nav-link" })</li>
+						<li class="nav-item">@Html.ActionLink("Sales", "Index", "Sales", null, new { @class = "nav-link" })</li>
 					}
 					@if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
 					{
-					<li class="nav-item">@Html.ActionLink("Sales", "Index", "Sales", null, new { @class = "nav-link" })</li>
-					<li class="nav-item">@Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link" })</li>
+						<li class="nav-item">@Html.ActionLink("Sales", "Index", "Sales", null, new { @class = "nav-link" })</li>
+						<li class="nav-item">@Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link" })</li>
 					}
-					@Html.Partial("_LoginPartial")
+					@if (User.Identity.IsAuthenticated)
+					{
+						@Html.Partial("_LoginPartial")
+
+					}
 
 				</ul>
 

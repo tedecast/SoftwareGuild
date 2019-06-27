@@ -51,11 +51,11 @@
 <div class="row">
 	<div class=" col-4 form-group">
 		<label>Name</label>
-		@Html.TextBoxFor(m => m.Sale.Name, new { Name = "Name", @class = "form-control" })
+		@Html.TextBoxFor(m => m.Sale.Name, new { Name = "Name", @class = "form-control", required="required"})
 	</div>
 	<div class="col-4 form-group">
 		<label>Phone</label>
-		@Html.TextBoxFor(m => m.Sale.Phone, new { Name = "Phone", @class = "form-control" })
+		@Html.TextBoxFor(m => m.Sale.Phone, new { Name = "Phone", @class = "form-control", required = "required", type="phone"})
 	</div>
 	<div class="col-4 form-group">
 
@@ -64,13 +64,13 @@
 <div class="row">
 	<div class="col-12 form-group">
 		<label>Email</label>
-		@Html.TextBoxFor(m => m.Sale.Email, new { Name = "Email",@class = "form-control" })
+		@Html.TextBoxFor(m => m.Sale.Email, new { Name = "Email",@class = "form-control", required = "required", type="email"})
 	</div>
 </div>
 <div class="row">
 	<div class="col-4 form-group">
 		<label>Street 1</label>
-		@Html.TextBoxFor(m => m.Sale.Street1, new { Name = "Street1", @class = "form-control" })
+		@Html.TextBoxFor(m => m.Sale.Street1, new { Name = "Street1", @class = "form-control", required = "required" })
 	</div> <div class="col-4 form-group">
 		<label>Street 2</label>
 		@Html.TextBoxFor(m => m.Sale.Street2, new { Name = "Street2", @class = "form-control" })
@@ -82,7 +82,7 @@
 <div class="row">
 	<div class="col-4 form-group">
 		<label>City:</label>
-		@Html.TextBoxFor(m => m.Sale.City, new { Name = "City", @class = "form-control" })
+		@Html.TextBoxFor(m => m.Sale.City, new { Name = "City", @class = "form-control", required = "required" })
 	</div>
 	<div class="col-4 sales-state-dropdown">
 		<label>State</label>

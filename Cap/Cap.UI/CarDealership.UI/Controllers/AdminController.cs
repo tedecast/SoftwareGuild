@@ -8,15 +8,18 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace CarDealership.UI.Controllers
 {
 	public class AdminController : Controller
 	{
 		// GET: Admin
+		[Authorize]
 		public ActionResult Index()
 		{
 			InventoryViewModel model = new InventoryViewModel();
@@ -81,7 +84,7 @@ namespace CarDealership.UI.Controllers
 		{
 			Vehicle vehicle = VehicleRepositoryFactory.GetRepository().GetVehicleById(id);
 			AdminViewModelEdit viewModel = new AdminViewModelEdit();
-			viewModel.Populate();
+			viewModel.Populate(id);
 			viewModel.Vehicle = vehicle;
 
 			return View(viewModel);
@@ -122,7 +125,7 @@ namespace CarDealership.UI.Controllers
 			}
 
 			AdminViewModelEdit viewModel = new AdminViewModelEdit();
-			viewModel.Populate();
+			viewModel.Populate(model.Vehicle.VehicleId);
 			viewModel.Vehicle = model.Vehicle;
 
 			return View(viewModel);
@@ -150,7 +153,9 @@ namespace CarDealership.UI.Controllers
 		[Authorize]
 		public ActionResult Users()
 		{
+
 			var model = UsersRepositoryFactory.GetRepository().GetAll();
+
 			return View(model);
 		}
 
@@ -167,7 +172,7 @@ namespace CarDealership.UI.Controllers
 
 		[Authorize]
 		[HttpPost]
-		public async Task<ActionResult> AddUser(UserViewModel viewModel)
+		public ActionResult AddUser(UserViewModel viewModel)
 		{
 			ApplicationDbContext context = new ApplicationDbContext();
 
@@ -179,11 +184,11 @@ namespace CarDealership.UI.Controllers
 					var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 					var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 					var user = viewModel.User;
+					user.IsEnabled = true;
 					user.Email = viewModel.User.UserName;
-					var result = await UserManager.CreateAsync(user, user.PasswordHash);
+					var result = UserManager.Create(user, user.PasswordHash);
 					if (result.Succeeded)
 						result = UserManager.AddToRole(user.Id, user.RoleId);
-
 					return RedirectToAction("Users", "Admin");
 				}
 			}
@@ -196,7 +201,7 @@ namespace CarDealership.UI.Controllers
 			return View(viewModel);
 		}
 
-		[Authorize]
+		[Authorize(Roles = "admin")]
 		public ActionResult UpdateUser(string id)
 		{
 			var context = new ApplicationDbContext();
@@ -209,7 +214,7 @@ namespace CarDealership.UI.Controllers
 			return View(viewModel);
 		}
 
-		[Authorize(Roles = "admin,sales")]
+		[Authorize(Roles = "admin")]
 		[HttpPost]
 		public ActionResult UpdateUser(UserViewModel viewModel)
 		{
@@ -223,16 +228,33 @@ namespace CarDealership.UI.Controllers
 					var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 					var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 					var user = UserManager.FindById(viewModel.User.Id);
+					var oldRole = user.RoleId;
 
 					user.FirstName = viewModel.User.FirstName;
 					user.LastName = viewModel.User.LastName;
 					user.UserName = viewModel.User.UserName;
 					user.Email = viewModel.User.UserName;
-					user.PasswordHash = viewModel.User.PasswordHash;
+					user.PasswordHash = UserManager.PasswordHasher.HashPassword(viewModel.User.PasswordHash);
+					user.RoleId = viewModel.User.RoleId;
+					UserManager.RemoveFromRoles(user.Id, oldRole);
+
+					if (viewModel.User.RoleId == "Disabled")
+						user.IsEnabled = false;
+					else
+						user.IsEnabled = true;
 
 					var result = UserManager.Update(user);
 					if (result.Succeeded)
+					{
 						result = UserManager.AddToRole(user.Id, user.RoleId);
+					}
+
+					if (oldRole == "admin" && user.RoleId != "admin" && User.Identity.GetUserId() == user.Id)
+					{
+						FormsAuthentication.SignOut();
+						Roles.DeleteCookie();
+						Session.Clear();
+					}
 
 					return RedirectToAction("Users", "Admin");
 				}

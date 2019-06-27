@@ -92,5 +92,31 @@ namespace CarDealership.UI.Controllers
 				return Ok(filteredVehicles);
 			}
 		}
+
+		[Route("inventory/search/sales")]
+		[AcceptVerbs("GET")]
+		public IHttpActionResult GetSalesBySearch(string searchTerm, int? minPrice, int? maxPrice, int? minYear, int? maxYear)
+		{
+			SearchItem parameters = new SearchItem()
+			{
+				SearchTerm = searchTerm,
+				MinPrice = minPrice,
+				MaxPrice = maxPrice,
+				MinYear = minYear,
+				MaxYear = maxYear
+			};
+
+			var repo = VehicleRepositoryFactory.GetRepository();
+			List<VehicleItem> vehicle = repo.GetVehicleBySearch(parameters);
+
+			if (vehicle == null)
+			{
+				return NotFound();
+			}
+			else
+			{
+				return Ok(vehicle.Where(x => x.IsSold == false));
+			}
+		}
 	}
 }	

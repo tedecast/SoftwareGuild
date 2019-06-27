@@ -18,7 +18,7 @@
 		</div>
 		<div class="col-4 form-group">
 			<label>Model</label>
-			@Html.DropDownListFor(m => m.Vehicle.ModelId, new List<SelectListItem>(), new { @class = "form-control" })
+			@Html.DropDownListFor(m => m.Vehicle.ModelId, Model.Model, new { @class = "form-control" })
 		</div>
 		<div class="col-4 form-group">
 
@@ -118,7 +118,7 @@
 		<div class="col-12">
 			
 			<button type="submit" style="margin-left: 15px; margin-top: 15px;" id="delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this vehicle?');" formaction="/Admin/DeleteVehicle/">Delete</button>
-			<button type="submit" style="margin-left: 15px; margin-top: 15px;" id="save" value="Save" class="btn btn-dark" formaction="/EditVehicle/">Save</button>
+			<button type="submit" style="margin-left: 15px; margin-top: 15px;" id="save" value="Save" class="btn btn-dark">Save</button>
 
 		</div>
 	</div>
@@ -134,7 +134,12 @@
 				success: function (results) {
 					$('#Vehicle_ModelId').empty();
 					$.each(results, function (index, model) {
-						$('#Vehicle_ModelId').append("<option value='" + model.ModelId + "'>" + model.ModelName + "</option>")
+						if (@Model.Vehicle.ModelId == model.ModelId) {
+							$('#Vehicle_ModelId').append("<option value='" + model.ModelId + "' selected='selected'>" + model.ModelName + "</option>")
+						}
+						else {
+							$('#Vehicle_ModelId').append("<option value='" + model.ModelId + "'>" + model.ModelName + "</option>")
+						}
 					});
 				},
 				error: function () {

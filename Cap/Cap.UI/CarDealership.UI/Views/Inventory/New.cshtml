@@ -57,35 +57,7 @@
 	</div>
 
 	<div id="search-results">
-		@foreach (var vehicle in Model.Vehicles)
-		{
-			<br />
-			<div class="row vehicleTitle">
-				<div class="col-xs-12" id="contentRow">
-					<strong><p>@vehicle.Year @vehicle.MakeName @vehicle.ModelName</p></strong>
-				</div>
-			</div>
-			<div class="row vehicleSearchResult">
-				<div class="col-md-3" id="contentRow">
-					<img class="center-block" src="@Url.Content("~/Images/" + vehicle.PhotoPath)" />
-				</div>
-				<div class="col-md-3 searchResultsCell" id="contentRow">
-					<p><strong>Body Style:</strong> @vehicle.BodyType </p>
-					<p><strong>Trans:</strong> @vehicle.TransmissionType</p>
-					<p><strong>Color:</strong> @vehicle.ColorName</p>
-				</div>
-				<div class="col-md-3 searchResultsCell" id="contentRow">
-					<p><strong>Interior:</strong> @vehicle.InteriorColor</p>
-					<p><strong>Mileage:</strong>  @vehicle.TypeName</p>
-					<p><strong>VIN #:</strong> @vehicle.VIN</p>
-				</div>
-				<div class="col-md-3 searchResultsCell" id="contentRow">
-					<p><strong>Sale Price:</strong> @vehicle.SalePrice.ToString("C0")</p>
-					<p><strong>MSRP:</strong> @vehicle.MSRP.ToString("C0")</p>
-					<button type="button" onclick="location.href='@Url.Action("details", "inventory", new { id=vehicle.VehicleId})'" class="btn btn-dark">Details</button>
-				</div>
-			</div>
-		}
+		
 	</div>
 </div>
 
@@ -93,6 +65,7 @@
 {
 	<script>
 		$(document).ready(function () {
+			$('#results-header').hide();
 			$('#search-form').submit(function (e) {
 				search();
 				return false;
@@ -111,6 +84,7 @@
 				type: 'GET',
 				url: 'http://localhost:60758/inventory/search/new?' + params,
 				success: function (results) {
+					$('#results-header').show();
 					$('#search-results').empty();
 					var imagePath = '@Url.Content("~/Images/")';
 
@@ -140,7 +114,7 @@
 							'<p><strong>MSRP:</strong> $' + vehicle.MSRP.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</p>' +
 							'<button type="button" onclick="location.href=\'/inventory/details/' + vehicle.VehicleId + '\'" class="btn btn-dark">Details</button>' +
 							'</div>' +
-							'</div>';
+							'</div> <br/>';
 
 						$('#search-results').append(html.toString());
 					});

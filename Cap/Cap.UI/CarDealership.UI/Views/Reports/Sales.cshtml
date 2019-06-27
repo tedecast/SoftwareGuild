@@ -94,7 +94,7 @@
 					$.each(results, function (index, user) {
 						var html = '<tr>' +
 							'<td>' + user.FirstName + ' ' + user.LastName + '</td>' +
-							'<td>' + user.TotalSales.toString(C0) + '</td>' +
+							'<td> $' + user.TotalSales.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</td>' +
 							'<td>' + user.TotalVehicles + '</td>' +
 							'</tr>';
 						$('#search-results').append(html.toString());

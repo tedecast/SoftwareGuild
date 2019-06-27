@@ -35,19 +35,20 @@ namespace CarDealership.UI.Models
 				Interior = new List<SelectListItem>();
 			}
 			
-			public void Populate()
+			public void Populate(int id)
 			{
 				List<MakeItem> makes = VehicleRepositoryFactory.GetRepository().GetMakeItems();
 				List<ModelItem> models = VehicleRepositoryFactory.GetRepository().GetModelItems();
+			Vehicle vehicle = VehicleRepositoryFactory.GetRepository().GetVehicleById(id);
 				for (int i = 0; i < makes.Count; i++)
 				{
-					var makeItem = new SelectListItem { Value = (i + 1).ToString(), Text = makes[i].MakeName.ToString() };
-				Make.Add(makeItem);
+					var makeItem = new SelectListItem { Value = makes[i].MakeId.ToString(), Text = makes[i].MakeName.ToString(), Selected = makes[i].MakeId == vehicle.MakeId };
+					Make.Add(makeItem);
 				}
 
 				for (int i = 0; i < models.Count; i++)
 				{
-					var modelItem = new SelectListItem { Value = (i + 1).ToString(), Text = models[i].ModelName.ToString() };
+					var modelItem = new SelectListItem { Value = models[i].MakeId.ToString(), Text = models[i].ModelName.ToString(), Selected = models[i].ModelId == vehicle.ModelId };
 				Model.Add(modelItem);
 				}
 

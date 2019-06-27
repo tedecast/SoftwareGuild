@@ -42,13 +42,13 @@ namespace CarDealership.UI.Models
 			List<ModelItem> models = VehicleRepositoryFactory.GetRepository().GetModelItems();
 			for (int i = 0; i < makes.Count; i++)
 			{
-				var makeItem = new SelectListItem { Value = (i + 1).ToString(), Text = makes[i].MakeName.ToString() };
+				var makeItem = new SelectListItem { Value = (makes[i].MakeId).ToString(), Text = makes[i].MakeName.ToString() };
 				Make.Add(makeItem);
 			}
 
 			for (int i = 0; i < models.Count; i++)
 			{
-				var modelItem = new SelectListItem { Value = (i + 1).ToString(), Text = models[i].ModelName.ToString() };
+				var modelItem = new SelectListItem { Value = (models[i].MakeId).ToString(), Text = models[i].ModelName.ToString() };
 				Model.Add(modelItem);
 			}
 

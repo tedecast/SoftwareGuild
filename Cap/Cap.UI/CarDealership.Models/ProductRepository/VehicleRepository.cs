@@ -219,7 +219,7 @@ namespace CarDealership.Data.ProductRepository
 				"INNER JOIN[Type] t ON t.TypeId = v.TypeID " +
 				"INNER JOIN Body b ON b.BodyId = v.BodyId " +
 				"INNER JOIN Transmission tr ON tr.TransmissionId = v.TransmissionId " +
-				"WHERE 1 = 1 AND isSold = 0 AND isDeleted = 0";
+				"WHERE 1 = 1 AND isDeleted = 0";
 
 				if (item.MinPrice.HasValue)
 				{
