@@ -77,14 +77,14 @@ namespace CarDealership.Tests.Integration_Tests
 			var repo = UsersRepositoryFactory.GetRepository();
 			repo.AddUser(item);
 
-			item.RoleId = "admin";
+			item.RoleId = "Admin";
 			item.UserId = "d10dee9d-5dc7-44e3-b550-10cb35982cf5";
 
 			repo.EditUser(item);
 
 			var users = repo.GetAll();
 			Assert.AreEqual(2, users.Count);
-			Assert.AreEqual("admin", users[1].RoleId);
+			Assert.AreEqual("Admin", users[1].RoleId);
 		}
 
 		[Test]

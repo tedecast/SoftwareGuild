@@ -201,7 +201,7 @@ namespace CarDealership.UI.Controllers
 			return View(viewModel);
 		}
 
-		[Authorize(Roles = "admin")]
+		[Authorize(Roles = "Admin")]
 		public ActionResult UpdateUser(string id)
 		{
 			var context = new ApplicationDbContext();
@@ -214,7 +214,7 @@ namespace CarDealership.UI.Controllers
 			return View(viewModel);
 		}
 
-		[Authorize(Roles = "admin")]
+		[Authorize(Roles = "Admin")]
 		[HttpPost]
 		public ActionResult UpdateUser(UserViewModel viewModel)
 		{
@@ -249,7 +249,7 @@ namespace CarDealership.UI.Controllers
 						result = UserManager.AddToRole(user.Id, user.RoleId);
 					}
 
-					if (oldRole == "admin" && user.RoleId != "admin" && User.Identity.GetUserId() == user.Id)
+					if (oldRole == "Admin" && user.RoleId != "Admin" && User.Identity.GetUserId() == user.Id)
 					{
 						FormsAuthentication.SignOut();
 						Roles.DeleteCookie();

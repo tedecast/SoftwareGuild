@@ -25,6 +25,13 @@ namespace CarDealership.UI.Migrations
 			var userManager = new UserManager<ApplicationUser>(store);
 			var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
+			var sales = new IdentityRole { Name = "Sales" };
+			var disabled = new IdentityRole { Name = "Disabled" };
+			var admin = new IdentityRole { Name = "Admin" };
+
+			roleManager.Create(admin);
+			roleManager.Create(sales);
+			roleManager.Create(disabled);
 			if (!context.Users.Any(u => u.UserName == "admin@test.com"))
 			{
 
@@ -34,17 +41,14 @@ namespace CarDealership.UI.Migrations
 					IsEnabled = true,
 					FirstName = "Jeremy",
 					LastName = "Wakefield",
-					RoleId = "admin",
-					Email = "Jeremy@test.com"
+					RoleId = "Admin",
+					Email = "admin@test.com"
 				};
 
 				userManager.Create(user, "Test123!");
-				userManager.AddToRole(user.Id, "admin");
+				userManager.AddToRole(user.Id, "Admin");
 			}
-			var sales = new IdentityRole { Name = "Sales" };
-			var disabled = new IdentityRole { Name = "Disabled" };
-			roleManager.Create(sales);
-			roleManager.Create(disabled);
+
 
 
 		}

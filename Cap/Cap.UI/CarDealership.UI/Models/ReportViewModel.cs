@@ -22,7 +22,7 @@ namespace CarDealership.UI.Models
 		public void Populate()
 		{
 			var context = new ApplicationDbContext();
-			var allUsers = context.Users.ToList().Where(x => x.RoleId == "admin" || x.RoleId == "sales");
+			var allUsers = context.Users.ToList().Where(x => x.RoleId == "Admin" || x.RoleId == "sales");
 
 			foreach (var user in allUsers)
 			{

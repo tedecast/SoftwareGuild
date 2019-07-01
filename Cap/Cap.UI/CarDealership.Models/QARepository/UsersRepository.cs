@@ -15,7 +15,7 @@ namespace CarDealership.Data.QARepository
 			new UserItem
 			{
 				UserId = "00000000-0000-0000-0000-000000000000",
-				RoleId = "admin",
+				RoleId = "Admin",
 				Email = "test1@test.com",
 				LockoutEnabled = false,
 				UserName = "admin@test.com",

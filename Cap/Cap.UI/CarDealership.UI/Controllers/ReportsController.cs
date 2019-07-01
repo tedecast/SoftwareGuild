@@ -11,13 +11,13 @@ namespace CarDealership.UI.Controllers
     public class ReportsController : Controller
     {
         // GET: Reports
-		[Authorize(Roles = "admin")]
+		[Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             return View();
         }
 
-		[Authorize(Roles = "admin")]
+		[Authorize(Roles = "Admin")]
 		public ActionResult Sales()
 		{
 			ReportViewModel viewModel = new ReportViewModel();
@@ -26,7 +26,7 @@ namespace CarDealership.UI.Controllers
 			return View(viewModel);
 		}
 
-		[Authorize(Roles = "admin")]
+		[Authorize(Roles = "Admin")]
 		[HttpPost]
 		public ActionResult Sales(ReportViewModel viewModel)
 		{
@@ -34,7 +34,7 @@ namespace CarDealership.UI.Controllers
 			return View();
 		}
 
-		[Authorize(Roles = "admin")]
+		[Authorize(Roles = "Admin")]
 		public ActionResult Inventory()
 		{
 			InventoryReportViewModel model = new InventoryReportViewModel();

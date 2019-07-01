@@ -83,6 +83,10 @@ IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
    WHERE ROUTINE_NAME = 'GetInventoryReport')
       DROP PROCEDURE GetInventoryReport
 GO
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
+   WHERE ROUTINE_NAME = 'GetUsers')
+      DROP PROCEDURE GetUsers
+GO
 CREATE PROCEDURE DbReset
 AS
 	DELETE FROM Special
@@ -454,4 +458,11 @@ AS
 	group by [Year], m.MakeName, mo.ModelName, t.TypeName
 	order by [Year], m.MakeName, mo.ModelName, t.TypeName desc
 
+GO
+
+CREATE PROCEDURE GetAllUsers
+AS
+	SELECT  u.Id AS UserId, LastName, FirstName, UserName, r.Name AS RoleId, PasswordHash FROM AspNetUsers u
+	INNER JOIN AspNetUserRoles ur ON ur.UserId = u.Id
+	INNER JOIN AspNetRoles r ON r.Id = ur.RoleId
 GO
