@@ -273,14 +273,5 @@ namespace CarDealership.Tests.Integration_Tests
 
 			Assert.AreEqual(true, sold.IsSold);
 		}
-
-		[Test]
-		public void CanGetReport()
-		{
-
-			var sRepo = VehicleRepositoryFactory.GetRepository().InventoryReport();
-
-			Assert.AreEqual("Kia", sRepo[0].MakeName);
-		}
 	}
 }

@@ -109,9 +109,6 @@ AS
 	DELETE FROM PurchaseType
 	DELETE FROM Transmission
 	DELETE FROM [Type]
-	DELETE FROM	AspNetUsers Where Id='00000000-0000-0000-0000-000000000000'
-	DELETE FROM	AspNetUsers Where Id='00000000-0000-0000-0000-000000000001'
-	DELETE FROM	AspNetUsers Where Id='d10dee9d-5dc7-44e3-b550-10cb35982cf5'
 
 	SET IDENTITY_INSERT Special ON 
 	INSERT INTO Special (SpecialId,SpecialTitle, SpecialDescription)
@@ -176,9 +173,6 @@ AS
 	VALUES (1, '00000000-0000-0000-0000-000000000000', 1, 1, 22500.00, 'John', '5555555555','john@gmail.com', '555 BobCat Way', 'Apt 7', 'Austin', 'Texas', '55551', '1/1/2018'), 
 	(2, '00000000-0000-0000-0000-000000000000', 2, 2, 18000.00, 'James', '5555555555', 'James@gmail.com', '555  Whirlaway Court', '', 'Union', 'Kentucky', '55552', '1/2/2019')
 	SET IDENTITY_INSERT Sale OFF
-
-	INSERT INTO AspNetUsers(Id, RoleId, Email, EmailConfirmed, PasswordHash, PhoneNumber, PhoneNumberConfirmed, TwoFactorEnabled, LockoutEnabled, AccessFailedCount, UserName, FirstName, LastName)
-	VALUES ('00000000-0000-0000-0000-000000000000', 'admin', 'test@test.com', 1, 'test123', '5555555555', '5555555555', 0,  0, 0, 'Jeremy', 'Test', 'TestSubject')
 
 
 

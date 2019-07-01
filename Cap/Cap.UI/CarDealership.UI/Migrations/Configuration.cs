@@ -24,10 +24,19 @@ namespace CarDealership.UI.Migrations
 			var store = new UserStore<ApplicationUser>(context);
 			var userManager = new UserManager<ApplicationUser>(store);
 			var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+
 			if (!context.Users.Any(u => u.UserName == "admin@test.com"))
 			{
 
-				var user = new ApplicationUser { UserName = "admin@test.com" };
+				var user = new ApplicationUser()
+				{
+					UserName = "admin@test.com",
+					IsEnabled = true,
+					FirstName = "Jeremy",
+					LastName = "Wakefield",
+					RoleId = "admin",
+					Email = "Jeremy@test.com"
+				};
 
 				userManager.Create(user, "Test123!");
 				userManager.AddToRole(user.Id, "admin");

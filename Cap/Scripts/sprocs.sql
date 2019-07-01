@@ -68,18 +68,6 @@ IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
       DROP PROCEDURE GetAllUsers
 GO
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'AddUser')
-      DROP PROCEDURE AddUser
-GO
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'EditUser')
-      DROP PROCEDURE EditUser
-GO
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'EditPassword')
-      DROP PROCEDURE EditPassword
-GO
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
    WHERE ROUTINE_NAME = 'GetAllSpecials')
       DROP PROCEDURE GetAllSpecials
 GO
@@ -109,9 +97,6 @@ AS
 	DELETE FROM PurchaseType
 	DELETE FROM Transmission
 	DELETE FROM [Type]
-	DELETE FROM	AspNetUsers Where Id='00000000-0000-0000-0000-000000000000'
-	DELETE FROM	AspNetUsers Where Id='00000000-0000-0000-0000-000000000001'
-	DELETE FROM	AspNetUsers Where Id='d10dee9d-5dc7-44e3-b550-10cb35982cf5'
 
 	SET IDENTITY_INSERT Special ON 
 	INSERT INTO Special (SpecialId,SpecialTitle, SpecialDescription)
@@ -140,12 +125,29 @@ AS
 
 	SET IDENTITY_INSERT Make ON 
 	INSERT INTO Make (MakeId, UserId, MakeName, DateAdded)
-	VALUES (1,'admin@test.com', 'Subaru', '1/1/2011'), (2,'admin@test.com', 'Ford', '1/1/2012'), (3,'admin@test.com', 'Kia', '1/1/2013')
+	VALUES (1,'admin@test.com', 'Subaru', '1/1/2011'), (2,'admin@test.com', 'Ford', '1/1/2012'), (3,'admin@test.com', 'Kia', '1/1/2013'), (4, 'ron@gmail.com', 'Toyota', '2019-06-27 09:34:44.9966667')
 	SET IDENTITY_INSERT Make OFF
 
 	SET IDENTITY_INSERT Model ON 
 	INSERT INTO Model (ModelId, MakeId, UserId, ModelName, DateAdded)
-	VALUES (1, 1, '00000000-0000-0000-0000-000000000000', 'Outback', '1/1/2019'), (2, 2, '00000000-0000-0000-0000-000000000000', 'F-150', '1/1/2018'), (3, 3, '00000000-0000-0000-0000-000000000000', 'Sedona', '1/1/2017'), (4, 1, '00000000-0000-0000-0000-000000000000', 'Forester', '1/1/2017')
+	VALUES (1, 1, '00000000-0000-0000-0000-000000000000', 'Outback', '1/1/2019'), 
+	(2, 2, '00000000-0000-0000-0000-000000000000', 'F-150', '1/1/2018'), 
+	(3, 3, '00000000-0000-0000-0000-000000000000', 'Sedona', '1/1/2017'), 
+	(4, 1, '00000000-0000-0000-0000-000000000000', 'Forester', '1/1/2017'),
+	(5,	4,	'ron@gmail.com',	'Tacoma',	'2019-06-27 09:35:07.0200000'),
+	(6,	4,	'ron@gmail.com',	'RAV ',	'2019-06-27 09:35:14.8966667'),
+	(7,	4,	'ron@gmail.com',	'Highlander',	'2019-06-27 09:35:18.8566667'),
+	(8,	4,	'ron@gmail.com',	'Camry',	'2019-06-27 09:35:31.8633333'),
+	(9,	4,	'ron@gmail.com',	'Corolla',	'2019-06-27 09:36:54.3433333'),
+	(10,	2,	'ron@gmail.com',	'Escape',	'2019-06-27 09:38:02.0933333'),
+	(11,	2,	'ron@gmail.com',	'Explorer',	'2019-06-27 09:38:15.3666667'),
+	(12,	2,	'ron@gmail.com',	'Mustang',	'2019-06-27 09:38:26.0733333'),
+	(13,	2,	'ron@gmail.com',	'Fusion',	'2019-06-27 09:38:53.9766667'),
+	(14,	3,	'ron@gmail.com',	'Sorento',	'2019-06-27 09:39:47.9600000'),
+	(15,	3,	'ron@gmail.com',	'Optima',	'2019-06-27 09:40:08.2900000'),
+	(16,	3,	'ron@gmail.com',	'Soul',	'2019-06-27 09:40:12.2633333'),
+	(17,	1,	'ron@gmail.com',	'Impreza',	'2019-06-27 09:41:26.6400000'),
+	(18,	1,	'ron@gmail.com',	'CrossTrek',	'2019-06-27 09:41:43.9633333')
 	SET IDENTITY_INSERT Model OFF
 
 	SET IDENTITY_INSERT Transmission ON 
@@ -164,22 +166,34 @@ AS
 	SET IDENTITY_INSERT PurchaseType OFF
 
 	SET IDENTITY_INSERT Vehicle ON 
-	INSERT INTO Vehicle (VehicleId, MakeId, ModelId, InteriorId, ColorId, TypeId, BodyId, TransmissionId, [Year], VIN, Mileage, MSRP, SalePrice, [Description], PhotoPath, isSold, isFeatured, isDeleted)
-	VALUES (1, 3, 3, 3, 1, 1, 4, 1, 2019, '3TMMU4FN2AM023309', 0, 25000.00, 23000.00, 'New Kia for sale', 'inventory-1.jpg', 0, 1, 0), 
-	(2, 2, 2, 2, 4, 2, 3, 2, 2015, 'JT2SW22N7M0049240', 30000, 20000.00, 18000.00, 'Gently used Ford F-150 for sale', 'inventory-2.jpg', 0, 1, 0), 
-	(3, 1, 1, 1, 2, 2, 1, 1, 2011,'1GDHK39KX7E580109', 75000, 13000.00, 12000.00, 'Subaru OutBack for sale. Only one previous owner. Great family car!', 'inventory-3.jpg', 0, 0, 0),
-	(4, 1, 4, 1, 2, 2, 1, 1, 2012,'JH4DA9390MS033554', 80000, 16000, 14000.00, 'Subaru Forester for sale.', 'inventory-4.jpg', 0, 0, 0)
+	INSERT INTO Vehicle (VehicleId, MakeId, ModelId, BodyId, InteriorId, ColorId, TypeId, TransmissionId, [Year], VIN, Mileage, MSRP, SalePrice, [Description], PhotoPath, isSold, isFeatured, isDeleted)
+	VALUES (1, 3, 3, 4, 1, 3, 1,   1, 2019, '3TMMU4FN2AM023309', 0, 25000.00, 23000.00, 'New Kia for sale', 'inventory-1.jpg', 0, 1, 0), 
+	(2, 2, 2, 3, 2, 4, 2,  2, 2015, 'JT2SW22N7M0049240', 30000, 20000.00, 18000.00, 'Gently used Ford F-150 for sale', 'inventory-2.jpg', 0, 1, 0), 
+	(3, 1, 1,  1, 1, 2, 2, 1, 2011,'1GDHK39KX7E580109', 75000, 13000.00, 12000.00, 'Subaru OutBack for sale. Only one previous owner. Great family car!', 'inventory-3.jpg', 0, 0, 0),
+	(4, 1, 4, 1, 1, 2, 2, 1, 2012,'JH4DA9390MS033554', 80000, 16000, 14000.00, 'Subaru Forester for sale.', 'inventory-4.jpg', 0, 0, 0),
+	(5,	4,	5, 3, 1, 4,	2,	1,	2017, '3TMCZ5ANXHM058927',	22053,	35000,	33587,	'This loaded up 2017 Toyota Tacoma TRD is equipped with a SUNROOF.', 	'inventory-5.png', 1, 1, 0),
+	(6,	4,	6,	2,	1,	2,	2,	1,	2016,	'2T3WFREV8GW279026', 48931,	20414,	19495,	'Buying a new or pre-owned vehicle has never been easier!',	'inventory-6.png',	1,	0,	0),
+	(7,	4,	7, 2,	1,	1,	2,	1,	2002,	'JTEGF21A820064866',	137231,	7000,	5000,	'Prices do not include tax, title, or license fees.',	'inventory-7.png',	0,	0,	0),
+	(8,	4,	8,	1,	3,	3,	1,	1,	2019,	'T1B11HK9KU247803',	5,	25858,	22677,	'29/41 City/Highway MPG The 2019 Toyota Camry is the daring side of dependability.',	'inventory-8.png',	1,	1,	0),
+	(9,	4,	9,	1,	2,	5,	2,	1,	2011,	'2T1BU4EE6DC096236',	47990,	13000,	12100,	'CARVANA CERTIFIED INCLUDES: 150-POINT INSPECTION',	'inventory-9.png',	0,	0,	0),
+	(10, 2,	10,	2,	1,	3,	2,	1,	2015,	'1FMCU9J99FUB22436',	64510,	18000,	15588,	'REAR BACK UP CAMERA, BLUE TOOTH HANDSFREE, GOOD TIRES, GOOD BRAKES',	'inventory-10.png',	0,	1,	0),
+	(11, 2,	10,	2,	5,	5,	2,	1,	2011,	'1FMCU9J99FUB22',	70354,	10000,	9500,	'REAR BACK UP CAMERA, BLUE TOOTH HANDSFREE, GOOD TIRES, GOOD BRAKES',	'inventory-11.png',	0,	0,	0),
+	(12, 2,	11,	1,	2,	1,	1,	1,	2019,	'1FM5K8GT4KGA38951',	5,	45355,	53855,	'AVIGATION/NAV/GPS, SYNC3 TOUCHSCREEN', 	'inventory-12.png',	0,	1,	0),
+	(13, 2,	12,	1,	1,	1,	2,	2,	2010,	'JTEGF21A820064866',	45984,	12000,	10000,	'A nice used Mustang!',	'inventory-13.png',	0,	0,	0),
+	(14, 2,	13,	1,	4,	2,	2,	1,	2014,	'2T3WFREV8GW279026',	45010,	13454,	12500,	'A great Ford Fusion for sale!',	'inventory-14.png',	0,	0,	0),
+	(15, 3,	14,	2,	4,	4,	1,	1,	2018,	'2T3WFREV8GW279026',	5,	25000,	23155,	'A nice Kia Sorento for sale',	'inventory-15.png',	0,	0,	0),
+	(16, 3,	15,	1,	1,	1,	2,	1,	2016,	'JTEGF21A820064866',	30554,	18000,	16987,	'A nice Kia Optima for sale!',	'inventory-16.png',	0,	0,	0),
+	(17, 3,	16,	1,	2,	3,	2,	1,	2008,	'JTEGF21A820064866',	80453,	14098,	13444,	'A Kia Soul with Soul!',	'inventory-17.png',	0,	1,	0),
+	(18, 1,	17,	1,	4,	5,	1,	1,	2019,	'T1B11HK9KU247803',	30,	23000,	22484,	'A new Subaru!',	'inventory-18.png',	0,	0,	0),
+	(19, 1,	18,	1,	1,	1,	2,	1,	2009,	'3TMCZ5ANXHM058927',	60483,	15434,	13092,	'A used Subaru.',	'inventory-19.png',	0,	1,	0),
+	(20, 4,	9,	1,	1,	1,	2,	1,	2011,	'T1B11HK9KU247803',	5,	14000,	13000,	'Toyota for sale',	'inventory-20.png',	0,	0,	0)
 	SET IDENTITY_INSERT Vehicle OFF
 
-	SET IDENTITY_INSERT Sale ON 
-	INSERT INTO Sale (SaleId, UserId, PurchaseTypeId, VehicleId, PurchasePrice, [Name], Phone, Email, Street1, Street2, City, [State], Zipcode, DateSold)
-	VALUES (1, '00000000-0000-0000-0000-000000000000', 1, 1, 22500.00, 'John', '5555555555','john@gmail.com', '555 BobCat Way', 'Apt 7', 'Austin', 'Texas', '55551', '1/1/2018'), 
-	(2, '00000000-0000-0000-0000-000000000000', 2, 2, 18000.00, 'James', '5555555555', 'James@gmail.com', '555  Whirlaway Court', '', 'Union', 'Kentucky', '55552', '1/2/2019')
-	SET IDENTITY_INSERT Sale OFF
-
-	INSERT INTO AspNetUsers(Id, RoleId, Email, EmailConfirmed, PasswordHash, PhoneNumber, PhoneNumberConfirmed, TwoFactorEnabled, LockoutEnabled, AccessFailedCount, UserName, FirstName, LastName)
-	VALUES ('00000000-0000-0000-0000-000000000000', 'admin', 'test@test.com', 1, 'test123', '5555555555', '5555555555', 0,  0, 0, 'Jeremy', 'Test', 'TestSubject')
-
+SET IDENTITY_INSERT Sale ON 
+INSERT INTO Sale (SaleId, UserId, PurchaseTypeId, VehicleId, PurchasePrice, [Name], Phone, Email, Street1, Street2, City, [State], Zipcode, DateSold)
+VALUES (1, '00000000-0000-0000-0000-000000000000', 1, 1, 22500.00, 'John', '5555555555','john@gmail.com', '555 BobCat Way', 'Apt 7', 'Austin', 'Texas', '55551', '1/1/2018'), 
+(2, '00000000-0000-0000-0000-000000000000', 2, 2, 18000.00, 'James', '5555555555', 'James@gmail.com', '555  Whirlaway Court', '', 'Union', 'Kentucky', '55552', '1/2/2019')
+SET IDENTITY_INSERT Sale OFF
 
 
 GO
@@ -403,73 +417,6 @@ AS
 
 GO
 
-CREATE PROCEDURE GetAllUsers
-AS
-	SELECT  u.Id AS UserId, LastName, FirstName, UserName, r.Name AS RoleId, PasswordHash FROM AspNetUsers u
-	INNER JOIN AspNetUserRoles ur ON ur.UserId = u.Id
-	INNER JOIN AspNetRoles r ON r.Id = ur.RoleId
-GO
-
-CREATE PROCEDURE AddUser(
-	@UserId NVARCHAR(128),
-	@RoleId VARCHAR(10),
-	@PasswordHash VARCHAR(30),
-	@LockOutEnabled BIT,
-	@Username VARCHAR(40),
-	@FirstName VARCHAR(20),
-	@LastName VARCHAR(20),
-	@Email VARCHAR(30),
-	@PhoneNumberConfirmed VARCHAR(10),
-	@EmailConfirmed BIT,
-	@TwoFactorEnabled BIT,
-	@AccessFailedCount BIT
-)
-AS
-	INSERT INTO AspNetUsers (Id, RoleId, PasswordHash, LockoutEnabled, Username, FirstName, LastName, Email, PhoneNumberConfirmed, EmailConfirmed, TwoFactorEnabled, AccessFailedCount)
-	VALUES (@UserId, @RoleId, @PasswordHash, @LockOutEnabled, @Username, @FirstName, @LastName, @Email, @PhoneNumberConfirmed, @EmailConfirmed, @TwoFactorEnabled, @AccessFailedCount)
-GO
-
-CREATE PROCEDURE EditUser(
-	@UserId NVARCHAR(128),
-	@RoleId VARCHAR(10),
-	@PasswordHash VARCHAR(30),
-	@LockOutEnabled BIT,
-	@Username VARCHAR(40),
-	@FirstName VARCHAR(20),
-	@LastName VARCHAR(20),
-	@Email VARCHAR(30),
-	@PhoneNumberConfirmed VARCHAR(10),
-	@EmailConfirmed BIT,
-	@TwoFactorEnabled BIT,
-	@AccessFailedCount BIT
-)
-AS
-	UPDATE AspNetUsers 
-	 SET RoleId = @RoleId,
-	 PasswordHash = @PasswordHash,
-	 LockoutEnabled = @LockOutEnabled,
-	 UserName = @UserName,
-	 FirstName = @FirstName,
-	 LastName = @LastName,
-	 Email = @Email,
-	 PhoneNumberConfirmed = @PhoneNumberConfirmed,
-	EmailConfirmed = @EmailConfirmed,
-	TwoFactorEnabled = @TwoFactorEnabled,
-	AccessFailedCount = @AccessFailedCount
-	 WHERE Id = @UserId
-GO
-
-CREATE PROCEDURE EditPassword(
-	@UserId NVARCHAR(128),
-	@PasswordHash VARCHAR(30)
-)
-AS
-	UPDATE AspNetUsers 
-	 SET
-	 PasswordHash = @PasswordHash
-	 WHERE Id = @UserId
-GO
-
 CREATE PROCEDURE GetAllSpecials
 AS
 	SELECT * FROM Special 
@@ -508,4 +455,3 @@ AS
 	order by [Year], m.MakeName, mo.ModelName, t.TypeName desc
 
 GO
-

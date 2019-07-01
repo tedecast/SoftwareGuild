@@ -33,6 +33,8 @@
 </div>
 
 <hr />
+@if (Model.Featured != null)
+{
 <h3 style="margin-bottom: 5%">Featured Vehicles</h3>
 <div class="row">
 	@foreach (var view in Model.Featured)
@@ -43,7 +45,7 @@
 					<div class="content">
 						<div class="table">
 							<div class="table-cell">
-								<img src="@Url.Content("~/Images/" + view.PhotoPath )" />
+								<img src="@Url.Content("~/Images/" + view.PhotoPath)" />
 								<p>@view.Year  @view.MakeName @view.ModelName</p>
 								<p> @view.SalePrice.ToString("C0")</p>
 							</div>
@@ -54,3 +56,4 @@
 		</div>
 	}
 </div>
+}
