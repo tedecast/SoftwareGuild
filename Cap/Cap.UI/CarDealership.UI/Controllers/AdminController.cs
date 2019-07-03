@@ -1,4 +1,5 @@
-﻿using CarDealership.Models.Queries;
+﻿using CarDealership.BLL;
+using CarDealership.Models.Queries;
 using CarDealership.Models.Tables;
 using CarDealership.UI.Factories;
 using CarDealership.UI.Models;
@@ -6,16 +7,19 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Security;
 
 namespace CarDealership.UI.Controllers
 {
+
 	public class AdminController : Controller
 	{
 		// GET: Admin
@@ -50,6 +54,7 @@ namespace CarDealership.UI.Controllers
 
 					if (model.ImageUpload != null && model.ImageUpload.ContentLength > 0)
 					{
+
 						var savepath = Server.MapPath("~/Images/");
 
 						int vehicleId = model.Vehicle.VehicleId;
@@ -59,7 +64,9 @@ namespace CarDealership.UI.Controllers
 
 						var filePath = Path.Combine(savepath, strVehicleId + extension);
 
-						model.ImageUpload.SaveAs(filePath);
+						WebImage img = new WebImage(model.ImageUpload.InputStream);
+						img.Resize(100, 75, preserveAspectRatio: false, preventEnlarge:true).Crop(1,1);
+						img.Save(filePath);
 
 						model.Vehicle.PhotoPath = Path.GetFileName(filePath);
 					}
@@ -111,7 +118,9 @@ namespace CarDealership.UI.Controllers
 
 						var filePath = Path.Combine(savepath, strVehicleId + extension);
 
-						model.ImageUpload.SaveAs(filePath);
+						WebImage img = new WebImage(model.ImageUpload.InputStream);
+						img.Resize(100, 75, preserveAspectRatio: false, preventEnlarge: true).Crop(1, 1);
+						img.Save(filePath);
 
 						model.Vehicle.PhotoPath = Path.GetFileName(filePath);
 					}

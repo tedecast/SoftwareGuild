@@ -35,7 +35,7 @@ namespace CarDealership.UI.Migrations
 			if (!context.Users.Any(u => u.UserName == "admin@test.com"))
 			{
 
-				var user = new ApplicationUser()
+				var adminUser = new ApplicationUser()
 				{
 					UserName = "admin@test.com",
 					IsEnabled = true,
@@ -45,8 +45,21 @@ namespace CarDealership.UI.Migrations
 					Email = "admin@test.com"
 				};
 
-				userManager.Create(user, "Test123!");
-				userManager.AddToRole(user.Id, "Admin");
+				var salesUser = new ApplicationUser()
+				{
+					UserName = "sales@test.com",
+					IsEnabled = true,
+					FirstName = "Ron",
+					LastName = "Swanson",
+					RoleId = "Sales",
+					Email = "sales@test.com"
+				};
+
+				userManager.Create(adminUser, "Test123!");
+				userManager.AddToRole(adminUser.Id, "Admin");
+
+				userManager.Create(salesUser, "Test123!");
+				userManager.AddToRole(salesUser.Id, "Sales");
 			}
 
 

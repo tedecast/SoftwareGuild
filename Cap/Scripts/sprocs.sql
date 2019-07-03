@@ -129,7 +129,7 @@ AS
 
 	SET IDENTITY_INSERT Make ON 
 	INSERT INTO Make (MakeId, UserId, MakeName, DateAdded)
-	VALUES (1,'admin@test.com', 'Subaru', '1/1/2011'), (2,'admin@test.com', 'Ford', '1/1/2012'), (3,'admin@test.com', 'Kia', '1/1/2013'), (4, 'ron@gmail.com', 'Toyota', '2019-06-27 09:34:44.9966667')
+	VALUES (1,'admin@test.com', 'Subaru', '1/1/2011'), (2,'admin@test.com', 'Ford', '1/1/2012'), (3,'admin@test.com', 'Kia', '1/1/2013'), (4, 'admin@test.com', 'Toyota', '2019-06-27 09:34:44.9966667')
 	SET IDENTITY_INSERT Make OFF
 
 	SET IDENTITY_INSERT Model ON 
