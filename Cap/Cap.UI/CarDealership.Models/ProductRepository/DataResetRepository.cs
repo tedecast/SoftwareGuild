@@ -18,8 +18,8 @@ namespace CarDealership.Data.ProductRepository
 			{
 				cn.ConnectionString = Settings.GetConnectionString();
 
-				/* cn.Execute("DbReset",
-					commandType: CommandType.StoredProcedure);*/
+				cn.Execute("DbReset",
+					commandType: CommandType.StoredProcedure);
 			}
 		}
 	}

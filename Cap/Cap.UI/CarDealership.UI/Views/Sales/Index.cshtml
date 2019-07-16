@@ -68,6 +68,7 @@
 {
 	<script>
 		$(document).ready(function () {
+			$('#results-header').hide();
 			$('#search-form').submit(function (e) {
 				search();
 				return false;
@@ -93,7 +94,8 @@
 
 					$.each(results, function (index, vehicle) {
 					
-							var html =
+						var html =
+								'<br/>' + 
 								'<div class="row vehicleTitle">' +
 								'<div class="col-xs-12" id="contentRow">' +
 								'<strong><p>' + vehicle.Year + ' ' + vehicle.MakeName + ' ' + vehicle.ModelName + '</p></strong>' +

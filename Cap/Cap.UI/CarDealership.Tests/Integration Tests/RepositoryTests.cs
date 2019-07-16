@@ -10,7 +10,6 @@ using CarDealership.Models.Queries;
 using CarDealership.Models.Tables;
 using CarDealership.UI.Factories;
 using CarDealership.Data;
-using CarDealership.BLL;
 
 namespace CarDealership.Tests.Integration_Tests
 {
@@ -265,7 +264,14 @@ namespace CarDealership.Tests.Integration_Tests
 
 			var sRepo = SalesRepositoryFactory.GetRepository();
 			var vRepo = VehicleRepositoryFactory.GetRepository();
-			vRepo = AddSaleLogic.AddSale(vRepo, sRepo, sale.VehicleId);
+
+			if (Settings.GetRepositoryType() == "QA")
+			{
+				Vehicle v = vRepo.GetVehicleById(sale.VehicleId);
+				v.IsSold = true;
+
+				vRepo.EditVehicle(v);
+			}
 
 			sRepo.AddSale(sale);
 			VehicleItem sold = vRepo.GetVehicleItemById(sale.VehicleId);

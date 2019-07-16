@@ -1,5 +1,4 @@
-﻿using CarDealership.BLL;
-using CarDealership.Models.Queries;
+﻿using CarDealership.Models.Queries;
 using CarDealership.UI.Factories;
 using System;
 using System.Collections.Generic;
@@ -29,13 +28,14 @@ namespace CarDealership.UI.Models
 			var repo = VehicleRepositoryFactory.GetRepository();
 			if (sales)
 			{
-				Vehicles = FilterInventory.SalesInventory(repo.GetAll());
+				Vehicles =  repo.GetAll().Where(x => x.IsSold == false).ToList();
+				
 			}
 			if(New && !sales)
-				Vehicles = FilterInventory.NewInventory(repo.GetAll());
+				Vehicles = repo.GetAll().Where(x => x.TypeName == "New").ToList();
 			if(!New && !sales)
-				Vehicles = FilterInventory.UsedInventory(repo.GetAll());
-			if(admin)
+				Vehicles = repo.GetAll().Where(x => x.TypeName == "Used").ToList();
+			if (admin)
 			{
 				Vehicles = repo.GetAll();
 			}

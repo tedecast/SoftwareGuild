@@ -1,5 +1,4 @@
-﻿using CarDealership.BLL;
-using CarDealership.Models.Queries;
+﻿using CarDealership.Models.Queries;
 using CarDealership.Models.Tables;
 using CarDealership.UI.Factories;
 using CarDealership.UI.Models;

@@ -1,5 +1,4 @@
-﻿using CarDealership.BLL;
-using CarDealership.Models.Queries;
+﻿using CarDealership.Models.Queries;
 using CarDealership.UI.Factories;
 using System;
 using System.Collections.Generic;
@@ -61,8 +60,8 @@ namespace CarDealership.UI.Controllers
 			}
 			else
 			{
-				var filteredVehicles = FilterInventory.NewInventory(vehicle);
-				return Ok(filteredVehicles);
+				List<VehicleItem> filteredInventory = vehicle.Where(x => x.TypeName == "New").ToList();
+				return Ok(filteredInventory);
 			}
 		}
 
@@ -88,8 +87,8 @@ namespace CarDealership.UI.Controllers
 			}
 			else
 			{
-				var filteredVehicles = FilterInventory.UsedInventory(vehicle);
-				return Ok(filteredVehicles);
+				List<VehicleItem> filteredInventory = vehicle.Where(x => x.TypeName == "Used").ToList();
+				return Ok(filteredInventory);
 			}
 		}
 

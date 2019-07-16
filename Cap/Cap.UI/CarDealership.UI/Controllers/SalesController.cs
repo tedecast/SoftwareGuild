@@ -14,7 +14,7 @@ namespace CarDealership.UI.Controllers
     public class SalesController : Controller
     {
         // GET: Sales
-		[Authorize(Roles ="Sales,admin")]
+		[Authorize(Roles ="Sales, Admin")]
         public ActionResult Index()
         {
 			InventoryViewModel model = new InventoryViewModel();
@@ -23,7 +23,7 @@ namespace CarDealership.UI.Controllers
 		}
 
 		[HttpPost]
-		[Authorize(Roles = "Sales,admin")]
+		[Authorize(Roles = "Sales, Admin")]
 		public ActionResult Purchase(PurchaseModel model)
 		{
 			Sale sale = new Sale()
@@ -74,7 +74,7 @@ namespace CarDealership.UI.Controllers
 		}
 
 		// GET: Sales
-		[Authorize(Roles = "Sales,admin")]
+		[Authorize(Roles = "Sales, Admin")]
 		public ActionResult Purchase(int id)
 		{
 			PurchaseViewModel viewModel = new PurchaseViewModel();
