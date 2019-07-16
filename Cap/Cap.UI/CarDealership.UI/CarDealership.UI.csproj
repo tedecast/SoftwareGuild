@@ -438,10 +438,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CarDealership.BLL\CarDealership.BLL.csproj">
-      <Project>{efbb2ded-e0c1-4387-a18a-4fdc9d303898}</Project>
-      <Name>CarDealership.BLL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CarDealership.Data\CarDealership.Models.csproj">
       <Project>{f0cf68d8-606e-4b2e-9af1-499adc9402fd}</Project>
       <Name>CarDealership.Models</Name>
